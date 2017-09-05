@@ -1,0 +1,39 @@
+
+DROP TABLE IF EXISTS "public"."users" CASCADE;
+
+CREATE TABLE users
+(
+	id SERIAL PRIMARY KEY,
+    name text,
+    email text
+);
+
+
+DROP TABLE IF EXISTS "public"."events";
+
+CREATE TABLE events
+(
+	id SERIAL PRIMARY KEY,
+    event_description text,
+    event_date text,
+    organizer_id int4 REFERENCES users(id),
+    participant_id text
+);
+
+
+
+
+
+INSERT INTO users (name, email) VALUES ('Jose', 'jo@hotmail.com');
+INSERT INTO users (name, email) VALUES ('Anne', 'Ann@Watson.com');
+INSERT INTO users (name, email) VALUES ('Craig', 'ht2233@gmail.com');
+INSERT INTO users (name, email) VALUES ('Michael', 'm00@gmail.com');
+
+INSERT INTO events (event_description, event_date, organizer_id, participant_id) VALUES ('MariVana concert', 'September 12, 2017', null, null);
+INSERT INTO events (event_description, event_date, organizer_id, participant_id) VALUES ('Microsoft HackFest', 'October 3, 4', 2, null);
+
+
+Test:
+select users.name, events.event_description from users inner join events ON users.id = events.organizer_id
+
+rollback;
