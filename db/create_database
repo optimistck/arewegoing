@@ -3,8 +3,11 @@ DROP TABLE IF EXISTS "public"."users" CASCADE;
 CREATE TABLE users
 (
 	id SERIAL PRIMARY KEY,
-    name text NOT NULL,
-    email text NOT NULL
+	screen_name text,
+    oauth_token text,
+    oauth_token_secret,
+    name text,
+    email text
 );
 
 
