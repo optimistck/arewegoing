@@ -3,6 +3,7 @@ from twitter_utils import  get_request_token, get_oauth_verifier_url, get_access
 from user import User
 from database import Database
 import requests
+from event import Event
 
 app = Flask(__name__)
 app.secret_key = '1swfdqwsfqsqf234'
@@ -75,8 +76,14 @@ def eventsummary():
     organizer_id = request.args.get('organizer_id')
 
     #store into the database
+    event = Event(description, date, organizer_id, None)
+    event.save_to_db()
+    print("Saved to DB values")
     return render_template('eventsummary.html', user=g.user, description=description, date=date, organizer_id=organizer_id)
 
+@app.route('/events')
+def list_events():
+    return render_template('events.html')
 
 @app.route('/search') #make dynamic
 def search():
