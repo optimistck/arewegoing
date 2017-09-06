@@ -70,8 +70,12 @@ def event():
 
 @app.route('/event_summary')
 def eventsummary():
-    query = request.args.get('description')
-    return render_template('eventsummary.html', user=g.user, content=query)
+    description = request.args.get('description')
+    date = request.args.get('date')
+    organizer_id = request.args.get('organizer_id')
+
+    #store into the database
+    return render_template('eventsummary.html', user=g.user, description=description, date=date, organizer_id=organizer_id)
 
 
 @app.route('/search') #make dynamic
