@@ -5,18 +5,20 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>User Profile</title>
+    <title>Event</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
 
-    {{ user.screen_name }}
-
-    <form action="{{ url_for('search') }}">
-        <label for="q">Twitter search</label>
-        <input type="text" name="q" id="q" placeholder="your twitter search">
-        <button type = "submit" class="btn btn-primary">Search</button>
+  <h1>Let's setup the event</h1>
+    <p class="lead">
+    {{ user.screen_name }}, where would you want to go?
+    </p>
+    <form action="{{ url_for('eventsummary') }}">
+        <label for="description">Event description</label>
+        <input type="text" name="description" id="description" placeholder="activity description">
+        <button type = "submit" class="btn btn-primary">Create</button>
     </form>
 
     <!-- Optional JavaScript -->

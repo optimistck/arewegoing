@@ -26,7 +26,7 @@ def homepage():
 def twitter_login():
     #determine if the users is already logged in
     if 'screen_name' in session:
-        return redirect(url_for('profile'))
+        return redirect(url_for('event'))
 
     #first we need to get the request token
     request_token = get_request_token()
@@ -57,12 +57,22 @@ def twitter_auth():
 
     session['screen_name'] = user.screen_name
 
-    return redirect(url_for('profile')) #user.screen_name
+    return redirect(url_for('event')) #user.screen_name
 
 
 @app.route('/profile')
 def profile():
     return render_template('profile.html', user=g.user)
+
+@app.route('/event')
+def event():
+    return render_template('event.html', user=g.user)
+
+@app.route('/event_summary')
+def eventsummary():
+    query = request.args.get('description')
+    return render_template('eventsummary.html', user=g.user, content=query)
+
 
 @app.route('/search') #make dynamic
 def search():
