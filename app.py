@@ -83,7 +83,8 @@ def eventsummary():
 
 @app.route('/events')
 def list_events():
-    return render_template('events.html')
+    event = Event.load_from_db_by_organizer_id(2) #this is hardcoded
+    return render_template('events.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_id=event.id)
 
 @app.route('/search') #make dynamic
 def search():

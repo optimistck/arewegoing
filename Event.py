@@ -15,3 +15,11 @@ class Event:
             cursor.execute('INSERT INTO events (event_description, event_date, organizer_id) VALUES (%s, %s, %s)',
                            (self.event_description, self.event_date, self.organizer_id))
 
+    @classmethod
+    def load_from_db_by_organizer_id(cls, organizer_id):
+        with CursorFromConnectionFromPool() as cursor:
+            cursor.execute('SELECT * FROM events WHERE organizer_id=%s', (organizer_id,))
+            event_data = cursor.fetchone()
+            #but we really need to fetch more than one in the future! Not just the first one.
+            if event_data:
+                return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=[3], id=event_data[0])
