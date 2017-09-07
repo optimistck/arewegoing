@@ -19,5 +19,6 @@ CREATE TABLE events
     event_description text NOT NULL,
     event_date TIMESTAMP NOT NULL,
     organizer_id int4 REFERENCES users(id) NOT NULL,
-    participant_id text
+    participant_id text,
+    event_footprint varchar(9)
 );

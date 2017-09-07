@@ -1,6 +1,8 @@
 import oauth2
 import constants
 import urllib.parse as urlparse
+import random
+
 # create a consumer that represents our app. It exists regarding the user existence.
 consumer = oauth2.Consumer(constants.CONSUMER_KEY, constants.CONSUMER_SECRET)
 
@@ -39,3 +41,6 @@ def get_access_token(request_token, oauth_verifier):
 
     return dict(urlparse.parse_qsl(content.decode('utf-8'))) #obviously content var gets overwritten, having access token data
 
+def get_event_footprint():
+    random.seed(version=2)
+    return random.randrange(10000, 999999, 1)

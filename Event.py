@@ -1,10 +1,12 @@
 from database import CursorFromConnectionFromPool
 
 class Event:
-    def __init__(self, event_description, event_date, organizer_id, id):
+    def __init__(self, event_description, event_date, organizer_id, participant_id, event_footprint, id):
         self.event_description = event_description,
         self.event_date = event_date,
         self.organizer_id = organizer_id,
+        self.participant_id = participant_id,
+        self.event_footprint = event_footprint,
         self.id = id
 
     def __repr__(self):
@@ -12,8 +14,8 @@ class Event:
 
     def save_to_db(self):
         with CursorFromConnectionFromPool() as cursor:
-            cursor.execute('INSERT INTO events (event_description, event_date, organizer_id) VALUES (%s, %s, %s)',
-                           (self.event_description, self.event_date, self.organizer_id))
+            cursor.execute('INSERT INTO events (event_description, event_date, organizer_id, participant_id, event_footprint) VALUES (%s, %s, %s, %s, %s)',
+                           (self.event_description, self.event_date, self.organizer_id, self.participant_id, self.event_footprint))
 
     @classmethod
     def load_from_db_by_organizer_id(cls, organizer_id):

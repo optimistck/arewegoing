@@ -1,9 +1,10 @@
 from flask import Flask, render_template, session, redirect, request, url_for, g
-from twitter_utils import  get_request_token, get_oauth_verifier_url, get_access_token
+from twitter_utils import  get_request_token, get_oauth_verifier_url, get_access_token, get_event_footprint
 from user import User
 from database import Database
 import requests
 from event import Event
+
 
 app = Flask(__name__)
 app.secret_key = '1swfdqwsfqsqf234'
@@ -75,11 +76,11 @@ def eventsummary():
     date = request.args.get('date')
     organizer_id = request.args.get('organizer_id')
 
+    event_footprint = get_event_footprint()
     #store into the database
-    event = Event(description, date, organizer_id, None)
+    event = Event(description, date, organizer_id, None, event_footprint, None)
     event.save_to_db()
-    print("Saved to DB values")
-    return render_template('eventsummary.html', user=g.user, description=description, date=date, organizer_id=organizer_id)
+    return render_template('eventsummary.html', user=g.user, description=description, date=date, organizer_id=organizer_id, event_footprint=event_footprint)
 
 @app.route('/events')
 def list_events():
