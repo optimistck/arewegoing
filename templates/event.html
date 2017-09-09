@@ -11,11 +11,11 @@
   </head>
   <body>
 
-  <h1>Let's setup the event</h1>
+  <h1>Create event</h1>
     <p class="lead">
     {{ user.screen_name }}, where would you want to go?
     </p>
-    <form action="{{ url_for('eventsummary') }}">
+    <form action="{{ url_for('event_confirmation') }}">
         <label for="description">Event description</label>
         <input type="text" name="description" id="description" placeholder="activity description">
         <label for="date">Event description</label>

@@ -70,8 +70,8 @@ def profile():
 def event():
     return render_template('event.html', user=g.user)
 
-@app.route('/event_summary')
-def eventsummary():
+@app.route('/event_confirmation')
+def eventconfirmation():
     description = request.args.get('description')
     date = request.args.get('date')
     organizer_id = request.args.get('organizer_id')
@@ -80,7 +80,7 @@ def eventsummary():
     #store into the database
     event = Event(description, date, organizer_id, None, event_footprint, None)
     event.save_to_db()
-    return render_template('eventsummary.html', user=g.user, description=description, date=date, organizer_id=organizer_id, event_footprint=event_footprint)
+    return render_template('eventconfirmation.html', user=g.user, description=description, date=date, organizer_id=organizer_id, event_footprint=event_footprint)
 
 @app.route('/events')
 def list_events():
