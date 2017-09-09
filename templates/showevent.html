@@ -5,25 +5,16 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Event</title>
+    <title>Show Event</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
 
-  <h1>Create event</h1>
+  <h1>This shows an event based on the event footprint</h1>
     <p class="lead">
-    {{ user.screen_name }}, where would you want to go?
+    Description {{ description}}, Date {{ date }}, organizer_id {{organizer_id}}, event_footprint {{ event_footprint }}, participant_id {{participant_id}}
     </p>
-    <form action="{{ url_for('eventconfirmation') }}">
-        <label for="description">Event description</label>
-        <input type="text" name="description" id="description" placeholder="activity description">
-        <label for="date">Event description</label>
-        <input type="text" name="date" id="date" placeholder="date">
-        <label for="organizer_id">Event description</label>
-        <input type="text" name="organizer_id" id="organizer_id" placeholder="user id">
-        <button type = "submit" class="btn btn-primary">Create</button>
-    </form>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

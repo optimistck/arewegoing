@@ -87,6 +87,18 @@ def list_events():
     event = Event.load_from_db_by_organizer_id(2) #this is hardcoded
     return render_template('events.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_id=event.id)
 
+@app.route('/showevent')
+def show_event():
+    #NEXT:
+    #make a call to find out the name of the organizer
+    #make a call to find out the event items
+
+    event_footprint = request.args.get('event_footprint')
+
+
+    event = Event.load_event_from_db_by_event_footprint(event_footprint) #this is hardcoded
+    return  render_template('showevent.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_footprint=event.event_footprint, participant_id=event.participant_id)
+
 @app.route('/search') #make dynamic
 def search():
     query = request.args.get('q')
