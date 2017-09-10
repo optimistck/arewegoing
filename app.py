@@ -97,7 +97,7 @@ def show_event():
 
 
     event = Event.load_event_from_db_by_event_footprint(event_footprint) #this is hardcoded
-    return  render_template('showevent.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_footprint=event.event_footprint, participant_id=event.participant_id)
+    return  render_template('showevent.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_footprint=event.event_footprint)
 
 @app.route('/search') #make dynamic
 def search():

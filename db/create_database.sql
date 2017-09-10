@@ -11,7 +11,7 @@ CREATE TABLE users
 );
 
 
-DROP TABLE IF EXISTS "public"."events";
+DROP TABLE IF EXISTS "public"."events" CASCADE;
 
 CREATE TABLE events
 (
@@ -19,6 +19,16 @@ CREATE TABLE events
     event_description text NOT NULL,
     event_date TIMESTAMP NOT NULL,
     organizer_id int4 REFERENCES users(id) NOT NULL,
-    participant_id text,
     event_footprint varchar(9)
+);
+
+
+DROP TABLE IF EXISTS "public"."participation";
+
+CREATE TABLE participation
+(
+	id SERIAL PRIMARY KEY,
+    event_id int4 REFERENCES events(id) NOT NULL,
+    joined_date TIMESTAMP,
+    participant_id int4 REFERENCES users(id) NOT NULL
 );
