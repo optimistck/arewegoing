@@ -5,21 +5,36 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>I will go if you go ...</title>
+    <title>Work Bench - Test Harness</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
-    <h1>Home page</h1>
-    <a href="{{ url_for('twitter_login') }}">Login with Twitter</a>
-    <P></P>
-    <h3>Links</h3>
-    <UL>
-        <LI><a href="{{ url_for('list_events') }}">Listing of Events</a> - should be visible only once logged in, so should be in profile only</LI>
-        <LI><a href="{{ url_for('workbench_list_all_events') }}">List all events - Workbench</a></LI>
-        <LI><a href="http://127.0.0.1:4995/showevent?event_footprint=788474">http://127.0.0.1:4995/showevent?event_footprint=788474</a></LI>
 
-    </UL>
+  <h1>Work Bench - Test Harness</h1>
+
+    <p class="lead">
+ List of all events - unrestricted - the universe.
+    </p>
+
+      EVENTS: {{events}}
+
+
+      {{message}}
+
+      {{ description }}
+      {{date}}
+      {{organizer_id}}
+      {{event_id}}
+
+                {% if message %}
+                  And no participants either.
+                {% else %}
+                    <h3>Participants</h3>
+                    {{participants}}
+                {% endif %}
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

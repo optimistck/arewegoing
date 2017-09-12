@@ -85,12 +85,25 @@ def eventconfirmation():
 @app.route('/events')
 def list_events():
     # we want to show the events where the users is the organizer and events where the user is the participant.
-    event = Event.load_from_db_by_organizer_id(int(g.user.id)) #this is hardcoded
+    event = Event.load_from_db_by_organizer_id(int(g.user.id))
     if event != None:
         participants = Participation.load_event_participant_names(event.id)
     else:
         return render_template('events.html', message="No events found")
     return render_template('events.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_id=event.id, participants=participants)
+
+@app.route('/workbench')
+def workbench_list_all_events():
+    #list all the events regardless whether a user has the right to see it or not
+    participants = "None - hardcoded"
+    event = Event.workbench_load_all_events()
+    if event != None:
+        participants = "None - hardcoded 2"
+        #participants = Participation.load_event_participant_names(event.id)
+    else:
+        return render_template('workbench.html', message="No events found")
+    #return render_template('workbench.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_id=event.id, participants=participants)
+    return render_template('workbench.html', events=event)
 
 @app.route('/showevent')
 def show_event():
@@ -99,9 +112,7 @@ def show_event():
     #make a call to find out the event items
 
     event_footprint = request.args.get('event_footprint')
-
-
-    event = Event.load_event_from_db_by_event_footprint(event_footprint) #this is hardcoded
+    event = Event.load_event_from_db_by_event_footprint(event_footprint)
     return  render_template('showevent.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_footprint=event.event_footprint)
 
 @app.route('/search') #make dynamic

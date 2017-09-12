@@ -32,3 +32,13 @@ class Event:
             event_data = cursor.fetchone()
             if event_data:
                 return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=event_data[3], event_footprint=event_data[4], id=event_data[0], )
+
+    def workbench_load_all_events():
+        with CursorFromConnectionFromPool() as cursor:
+            cursor.execute('SELECT * FROM events')
+            event_data = cursor.fetchall()
+            #but we really need to fetch more than one in the future! Not just the first one.
+            if event_data:
+                return event_data
+                #return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=[3], event_footprint=event_data[4], id=event_data[0])
+
