@@ -17,6 +17,19 @@
  List of all events - unrestricted - the universe.
     </p>
 
+
+    <div class="container">
+        <ul class="list-group" id="events">
+
+            {% set css_class = 'list-group-item-info' %}
+
+            {% for event in events %}
+
+                <li class="list-group-item {{ css_class }}">{{ event[1] }}{{ event[2] }}{{ event[3] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
       EVENTS: {{events}}
 
 

@@ -11,6 +11,19 @@ class Event:
     def __repr__(self):
         return "<Event {}".format(self.event_description)
 
+    def json(self):
+        return {
+            'event_description': self.name,
+            'event_date': self.genre,
+            'organizer_id': self.watched,
+            'event_footprint': self.event_footprint,
+            'id': self.id
+        }
+
+    @classmethod
+    def from_json(cls, json_data):
+        return Event(**json_data)
+
     def save_to_db(self):
         with CursorFromConnectionFromPool() as cursor:
             cursor.execute('INSERT INTO events (event_description, event_date, organizer_id, event_footprint) VALUES (%s, %s, %s, %s)',
@@ -33,12 +46,18 @@ class Event:
             if event_data:
                 return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=event_data[3], event_footprint=event_data[4], id=event_data[0], )
 
+
     def workbench_load_all_events():
+        ## GOAL: take the output of the database, and put it into a JSON or a list to present to the web page. LIST!
         with CursorFromConnectionFromPool() as cursor:
             cursor.execute('SELECT * FROM events')
             event_data = cursor.fetchall()
+            list_of_events = []
             #but we really need to fetch more than one in the future! Not just the first one.
             if event_data:
-                return event_data
+                # iterate over the events data and return JSON
+                for event in event_data:
+                    list_of_events.append(event)
+                return list_of_events
                 #return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=[3], event_footprint=event_data[4], id=event_data[0])
 

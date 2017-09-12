@@ -96,14 +96,15 @@ def list_events():
 def workbench_list_all_events():
     #list all the events regardless whether a user has the right to see it or not
     participants = "None - hardcoded"
-    event = Event.workbench_load_all_events()
+    events = Event.workbench_load_all_events()
+    event_data = [{'description': event[1], 'date': event[2], 'organizer_id': event[3]} for event in events]
     if event != None:
         participants = "None - hardcoded 2"
         #participants = Participation.load_event_participant_names(event.id)
     else:
         return render_template('workbench.html', message="No events found")
     #return render_template('workbench.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_id=event.id, participants=participants)
-    return render_template('workbench.html', events=event)
+    return render_template('workbench.html', events=events)
 
 @app.route('/showevent')
 def show_event():
