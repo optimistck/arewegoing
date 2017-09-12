@@ -19,33 +19,32 @@
 
 
     <div class="container">
-        <ul class="list-group" id="events">
-
-            {% set css_class = 'list-group-item-info' %}
-
+      <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Organizer ID</th>
+        </tr>
+      </thead>
+      <tbody>
             {% for event in events %}
-
-                <li class="list-group-item {{ css_class }}">{{ event[1] }}{{ event[2] }}{{ event[3] }}</li>
+                    <tr>
+                      <td>{{ event[1] }}</td>
+                      <td>{{ event[2] }}</td>
+                      <td>{{ event[3] }}</td>
+                    </tr>
             {% endfor %}
-        </ul>
+      </tbody>
+      </table>
     </div>
 
-      EVENTS: {{events}}
-
-
-      {{message}}
-
-      {{ description }}
-      {{date}}
-      {{organizer_id}}
-      {{event_id}}
-
-                {% if message %}
-                  And no participants either.
-                {% else %}
-                    <h3>Participants</h3>
-                    {{participants}}
-                {% endif %}
+    {% if message %}
+      And no participants either.
+    {% else %}
+        <h3>Participants</h3>
+        {{participants}}
+    {% endif %}
 
 
     <!-- Optional JavaScript -->
