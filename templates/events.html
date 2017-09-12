@@ -12,14 +12,24 @@
   <body>
 
   <h1>Listing of Events</h1>
+
     <p class="lead">
     This lists all the events for a user. Eventually showing the status for each event (critical mass) and control mechanisms.
     </p>
+      {{message}}
 
       {{ description }}
       {{date}}
       {{organizer_id}}
       {{event_id}}
+
+                {% if message %}
+                  And no participants either.
+                {% else %}
+                    <h3>Participants</h3>
+                    {{participants}}
+                {% endif %}
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

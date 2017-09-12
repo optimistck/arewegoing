@@ -13,7 +13,7 @@ class Event:
 
     def save_to_db(self):
         with CursorFromConnectionFromPool() as cursor:
-            cursor.execute('INSERT INTO events (event_description, event_date, organizer_id, event_footprint) VALUES (%s, %s, %s, %s, %s)',
+            cursor.execute('INSERT INTO events (event_description, event_date, organizer_id, event_footprint) VALUES (%s, %s, %s, %s)',
                            (self.event_description, self.event_date, self.organizer_id, self.event_footprint))
 
     @classmethod
@@ -23,7 +23,7 @@ class Event:
             event_data = cursor.fetchone()
             #but we really need to fetch more than one in the future! Not just the first one.
             if event_data:
-                return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=[3], id=event_data[0])
+                return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=[3], event_footprint=event_data[4], id=event_data[0])
 
     @classmethod
     def load_event_from_db_by_event_footprint(cls, event_footprint):

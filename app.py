@@ -4,6 +4,7 @@ from user import User
 from database import Database
 import requests
 from event import Event
+from participation import Participation
 
 
 app = Flask(__name__)
@@ -74,18 +75,22 @@ def event():
 def eventconfirmation():
     description = request.args.get('description')
     date = request.args.get('date')
-    organizer_id = request.args.get('organizer_id')
-
+    organizer_id = g.user.id
     event_footprint = get_event_footprint()
     #store into the database
-    event = Event(description, date, organizer_id, None, event_footprint, None)
+    event = Event(description, date, organizer_id, event_footprint, None)
     event.save_to_db()
     return render_template('eventconfirmation.html', user=g.user, description=description, date=date, organizer_id=organizer_id, event_footprint=event_footprint)
 
 @app.route('/events')
 def list_events():
-    event = Event.load_from_db_by_organizer_id(2) #this is hardcoded
-    return render_template('events.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_id=event.id)
+    # we want to show the events where the users is the organizer and events where the user is the participant.
+    event = Event.load_from_db_by_organizer_id(int(g.user.id)) #this is hardcoded
+    if event != None:
+        participants = Participation.load_event_participant_names(event.id)
+    else:
+        return render_template('events.html', message="No events found")
+    return render_template('events.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_id=event.id, participants=participants)
 
 @app.route('/showevent')
 def show_event():

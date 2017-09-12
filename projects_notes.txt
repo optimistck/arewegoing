@@ -1,0 +1,9 @@
+      <div class="container">
+        <ul class="list-group" id="participants">
+
+            {% set css_class = 'list-group-item-info' %}
+            {% for element in content %}
+                <li class="list-group-item {{ css_class }}">{{ element['tweet'] }}</li>
+            {% endfor %}
+        </ul>
+    </div>

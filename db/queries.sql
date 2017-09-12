@@ -1,19 +1,36 @@
-select FirstSet.event_description, FirstSet.event_date, FirstSet.participant_id, FirstSet.event_footprint, SecondSet.name
+select FirstSet.event_description, FirstSet.event_date, FirstSet.event_footprint, SecondSet.name
 
 from
 (
-    SELECT event_description, event_date, organizer_id, participant_id, event_footprint
+    SELECT event_description, event_date, organizer_id, event_footprint
     FROM events
-    WHERE event_footprint = '788474'
+    WHERE event_footprint = '672370'
 ) as FirstSet
 inner join
 (
     SELECT name, id
     FROM users
-    WHERE id = 2
+    WHERE id = 3
 ) as SecondSet
 ON FirstSet.organizer_id = SecondSet.id
 
+
+
+-- Give me all the participants
+select SecondSet.name, FirstSet.participant_id
+
+from
+(
+    SELECT participant_id
+    FROM participation
+    WHERE event_id = 3
+) as FirstSet
+inner join
+(
+    SELECT name, id
+    FROM users
+) as SecondSet
+ON FirstSet.participant_id = SecondSet.id
 
 
 --this led to decision to create another table to show who is actually going to the event. This will lead to other tables being
@@ -21,3 +38,6 @@ ON FirstSet.organizer_id = SecondSet.id
 
 --UP NEXT: refactor the existing tables to add to the participation table when adding a new entry. And remove participants from the event table.
 
+select * from events
+
+INSERT INTO events (event_description, event_date, organizer_id, event_footprint) VALUES ('hi', '2018-1-1', '3', 232442)

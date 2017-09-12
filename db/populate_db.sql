@@ -18,5 +18,18 @@ INSERT INTO events (event_description, event_date, organizer_id) VALUES ('Hallow
 
 
 
+INSERT INTO participation (event_id, participant_id) VALUES (2, 6);
+INSERT INTO participation (event_id, participant_id) VALUES (2, 4);
+INSERT INTO participation (event_id, participant_id) VALUES (2, 5);
+INSERT INTO participation (event_id, participant_id) VALUES (3, 6);
+INSERT INTO participation (event_id, participant_id) VALUES (3, 4);
+INSERT INTO participation (event_id, participant_id) VALUES (3, 5);
+INSERT INTO participation (event_id, participant_id) VALUES (3, 5);
+-- TO DO NEXT: load the stuff auto / vs. hardcoded.
+-- TO DO: need to ensure a participants can't add themselves again to an event more than one.
+-- Then, if an organizer, you can't add yourself as a participant. Later.
+
+
 SELECT * FROM events;
 SELECT * FROM users;
+select * from participation;

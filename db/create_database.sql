@@ -29,6 +29,6 @@ CREATE TABLE participation
 (
 	id SERIAL PRIMARY KEY,
     event_id int4 REFERENCES events(id) NOT NULL,
-    joined_date TIMESTAMP,
+    joined_date TIMESTAMP default current_timestamp,
     participant_id int4 REFERENCES users(id) NOT NULL
 );

@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Event</title>
+    <title>Create Event</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
@@ -18,11 +18,9 @@
     <form action="{{ url_for('eventconfirmation') }}">
         <label for="description">Event description</label>
         <input type="text" name="description" id="description" placeholder="activity description">
-        <label for="date">Event description</label>
-        <input type="text" name="date" id="date" placeholder="date">
-        <label for="organizer_id">Event description</label>
-        <input type="text" name="organizer_id" id="organizer_id" placeholder="user id">
-        <button type = "submit" class="btn btn-primary">Create</button>
+        <label for="date">Date & Time</label>
+        <input type="text" name="date" id="date" placeholder="e.g., 2018-11-28">
+        <button type = "submit" class="btn btn-primary">Create Event</button>
     </form>
 
     <!-- Optional JavaScript -->
