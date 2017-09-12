@@ -41,3 +41,5 @@ ON FirstSet.participant_id = SecondSet.id
 select * from events
 
 INSERT INTO events (event_description, event_date, organizer_id, event_footprint) VALUES ('hi', '2018-1-1', '3', 232442)
+
+INSERT INTO participation (event_id, joined_date, participant_id) VALUES (9, '2017-09-12', 4)

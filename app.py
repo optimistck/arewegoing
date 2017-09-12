@@ -82,6 +82,19 @@ def eventconfirmation():
     event.save_to_db()
     return render_template('eventconfirmation.html', user=g.user, description=description, date=date, organizer_id=organizer_id, event_footprint=event_footprint)
 
+
+@app.route('/join_event')
+def joinevent():
+    event_id = request.args.get('event_id')
+    participant_id = g.user.id
+
+    # store into the database
+    participation = Participation(event_id=event_id, participant_id=participant_id, joined_date=None, id=None)
+    participation.save_to_db()
+
+    return render_template('joinconfirmation.html', user=g.user, event_id=event_id)
+
+
 @app.route('/events')
 def list_events():
     # we want to show the events where the users is the organizer and events where the user is the participant.
@@ -97,7 +110,7 @@ def workbench_list_all_events():
     #list all the events regardless whether a user has the right to see it or not
     participants = "None - hardcoded"
     events = Event.workbench_load_all_events()
-    event_data = [{'description': event[1], 'date': event[2], 'organizer_id': event[3]} for event in events]
+    event_data = [{'event_id': event[0], 'description': event[1], 'date': event[2], 'organizer_id': event[3], 'event_footprint': event[4]} for event in events]
     if event != None:
         participants = "None - hardcoded 2"
         #participants = Participation.load_event_participant_names(event.id)

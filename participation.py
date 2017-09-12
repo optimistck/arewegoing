@@ -10,11 +10,10 @@ class Participation:
     def __repr__(self):
         return "<Participation {}".format(self.id)
 
-    #needs work ### INCORRECT FROM COPY AND PASTE TO BE EDITED WHEN INSERTING PARTICIPANTS### Also, need one for taking people out.
     def save_to_db(self):
         with CursorFromConnectionFromPool() as cursor:
-            cursor.execute('INSERT INTO events (event_description, event_date, organizer_id, event_footprint) VALUES (%s, %s, %s, %s)',
-                           (self.event_description, self.event_date, self.organizer_id, self.event_footprint))
+            cursor.execute('INSERT INTO participation (event_id, participant_id) VALUES (%s, %s)',
+                           (self.event_id, self.participant_id))
 
 
     def load_event_participant_names(event_id):
