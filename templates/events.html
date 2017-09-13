@@ -19,6 +19,7 @@
 
 
     <div class="container">
+        {% if message == 'organizeronly' or message == 'participantandorganizer' %}
       <H3>You're the organizer for ...</H3>
       <table class="table table-hover">
       <thead>
@@ -44,8 +45,9 @@
             {% endfor %}
       </tbody>
       </table>
+        {% endif %}
 
-        {% if message == 'organizeronly' or message == 'participantandorganizer' %}
+        {% if message == 'participantonly' or message == 'participantandorganizer' %}
     <H3>You're a participant for ...</H3>
     <table class="table table-hover">
     <thead>
@@ -69,16 +71,6 @@
     </table>
         {% endif %}
   </div>
-
-
-
-                {% if message == 'participantandorganizer' %}
-                  He's both.
-                {% else %}
-                    <h3>Participants</h3>
-                    {{participants}}
-                {% endif %}
-
 
 
 

@@ -78,3 +78,10 @@ class Event:
             rows_deleted = cursor.rowcount
             if rows_deleted:
                 return rows_deleted
+
+    def get_event_id_from_event_footprint(event_footprint):
+        with CursorFromConnectionFromPool() as cursor:
+            cursor.execute('SELECT id FROM events WHERE event_footprint = %s', (event_footprint,))
+            event_id = cursor.fetchone()
+            if event_id:
+                return event_id

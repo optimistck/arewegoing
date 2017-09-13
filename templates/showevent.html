@@ -11,10 +11,28 @@
   </head>
   <body>
 
-  <h1>This shows an event based on the event footprint</h1>
-    <p class="lead">
-    Description {{ description}}, Date {{ date }}, organizer_id {{organizer_id}}, event_footprint {{ event_footprint }}
-    </p>
+    <div class="container">
+      <H3>Activity Details</H3>
+      <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+            {% for event in events %}
+                    <tr>
+                      <td>{{ description}}</td>
+                      <td>{{ date }}</td>
+                    </tr>
+            {% endfor %}
+      </tbody>
+      </table>
+
+  </div>
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

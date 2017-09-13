@@ -16,6 +16,27 @@
     {{ user.screen_name }} has made this query: Description {{ description}}, Date {{ date }}, organizer_id {{organizer_id}}, event_footprint {{ event_footprint }}
     </p>
 
+      <div class="container">
+      <H3>Activity Details</H3>
+      <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Need to undo?</th>
+        </tr>
+      </thead>
+      <tbody>
+                    <tr>
+                      <td>{{ description}}</td>
+                      <td>{{ date }}</td>
+                      <td><a href="{{ url_for('canceleventwithafootprint', event_footprint=event_footprint) }}">Cancel Event</a></td>
+                    </tr>
+      </tbody>
+      </table>
+
+  </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

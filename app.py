@@ -108,6 +108,14 @@ def cancelevent():
     cancel_result = Event.delete_event(event_id, participant_id)
     return render_template('confirmation.html', user=g.user, message="You cancelled the activity.")
 
+@app.route('/canceleventwithafoot')
+def canceleventwithafootprint():
+    event_footprint = request.args.get('event_footprint')
+    event_id = Event.get_event_id_from_event_footprint(event_footprint)
+    participant_id = g.user.id
+    cancel_result = Event.delete_event(event_id[0], participant_id)
+    return render_template('confirmation.html', user=g.user, message="You cancelled the activity.")
+
 @app.route('/events_old')
 def list_events_old():
     event = Event.load_from_db_by_organizer_id(int(g.user.id))
@@ -121,18 +129,14 @@ def list_events_old():
 def list_events():
     # we want to show the events where the users is the organizer and events where the user is the participant.
     events = Event.load_from_db_all_events_by_organizer_id(int(g.user.id))
-
-    # TODO: load the events in which I'm a participant. Start with SQL in the pgAdmin
     event_participant = Participation.load_participating_in_events(int(g.user.id))
 
-
-    # TODO: make it pretty, load the events in a table (take from workbench)
     if events == None and event_participant == None:
         return render_template('events.html', message="noeventsfound")
     elif events == None and event_participant != None:
-        return render_template('events.html', participant=event_participant, message="organizeronly")
+        return render_template('events.html', participant=event_participant, message="participantonly")
     elif event_participant == None and events != None:
-        return render_template('events.html', events=events, message="participantonly")
+        return render_template('events.html', events=events, message="organizeronly")
     else:
         return render_template('events.html', events=events, participant=event_participant, message="participantandorganizer")
 
@@ -156,7 +160,7 @@ def show_event():
     #NEXT:
     #make a call to find out the name of the organizer
     #make a call to find out the event items
-
+    #TODO THIS IS BROKEN
     event_footprint = request.args.get('event_footprint')
     event = Event.load_event_from_db_by_event_footprint(event_footprint)
     return  render_template('showevent.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_footprint=event.event_footprint)
