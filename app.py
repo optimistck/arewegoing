@@ -98,7 +98,8 @@ def joinevent():
 def bailfromevent():
     event_id = request.args.get('event_id')
     participant_id = g.user.id
-    return 0
+    bailout_result = Participation.delete_participant_from_event(event_id, participant_id)
+    return render_template('confirmation.html', message="You bailed out of the event.")
 
 @app.route('/events_old')
 def list_events_old():

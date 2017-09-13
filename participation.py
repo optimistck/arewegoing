@@ -32,3 +32,11 @@ class Participation:
                 for event in event_data:
                     list_of_events.append(event)
                 return list_of_events
+
+    def delete_participant_from_event(event_id, paricipant_id):
+        with CursorFromConnectionFromPool() as cursor:
+            cursor.execute('DELETE FROM participation WHERE participant_id = %s AND event_id=%s', (event_id, paricipant_id,))
+            #execution_result = cursor.execute()
+            rows_deleted = cursor.rowcount
+            if rows_deleted:
+                return rows_deleted
