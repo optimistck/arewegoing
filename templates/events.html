@@ -45,10 +45,12 @@
       </tbody>
       </table>
 
+        {% if message == 'organizeronly' or message == 'participantandorganizer' %}
     <H3>You're a participant for ...</H3>
     <table class="table table-hover">
     <thead>
       <tr>
+        <th>event id (temp)</th>
         <th>Description</th>
         <th>Date</th>
         <th>Remove?</th>
@@ -57,6 +59,7 @@
     <tbody>
           {% for participant_instance in participant %}
                   <tr>
+                    <td>{{participant_instance[0]}}</td>
                     <td>{{ participant_instance[1] }}</td>
                     <td>{{ participant_instance[2] }}</td>
                     <td>TODO: <a href="{{ url_for('bailfromevent', event_id=participant_instance[0]) }}">Bail Out</a></td>
@@ -64,6 +67,7 @@
           {% endfor %}
     </tbody>
     </table>
+        {% endif %}
   </div>
 
 

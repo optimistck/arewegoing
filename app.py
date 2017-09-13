@@ -120,7 +120,7 @@ def list_events():
 
     # TODO: make it pretty, load the events in a table (take from workbench)
     if events == None and event_participant == None:
-        return render_template('events.html', message="No events found")
+        return render_template('events.html', message="noeventsfound")
     elif events == None and event_participant != None:
         return render_template('events.html', participant=event_participant, message="organizeronly")
     elif event_participant == None and events != None:

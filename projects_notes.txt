@@ -1,9 +1,4 @@
-      <div class="container">
-        <ul class="list-group" id="participants">
+Bugs
 
-            {% set css_class = 'list-group-item-info' %}
-            {% for element in content %}
-                <li class="list-group-item {{ css_class }}">{{ element['tweet'] }}</li>
-            {% endfor %}
-        </ul>
-    </div>
+can't delete an event if there are participants already signed-up for it. Now need to find all the participants, send them an email, and then delete. Or make the event inactive and hide it.
+
