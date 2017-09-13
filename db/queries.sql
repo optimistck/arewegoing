@@ -33,6 +33,45 @@ inner join
 ON FirstSet.participant_id = SecondSet.id
 
 
+-- Give me all the events for which I'm a participant
+-- TO DO
+select SecondSet.name, FirstSet.participant_id
+
+from
+(
+    SELECT participant_id
+    FROM participation
+    WHERE event_id = 3
+) as FirstSet
+inner join
+(
+    SELECT name, id
+    FROM users
+) as SecondSet
+ON FirstSet.participant_id = SecondSet.id
+
+
+
+--get the event_id out of the participant table based on the participant_id and join on the events table to show event details.
+
+select FirstSet.id, FirstSet.event_description, FirstSet.event_date
+from
+(
+    SELECT event_description, event_date, id
+    FROM events
+) as FirstSet
+inner join
+(
+    SELECT event_id
+    FROM participation
+    WHERE participant_id = 6
+) as SecondSet
+ON FirstSet.id = SecondSet.event_id
+
+
+
+
+
 --this led to decision to create another table to show who is actually going to the event. This will lead to other tables being
 --reorganized, and also will allow for historical tracking and may be even post-event information
 

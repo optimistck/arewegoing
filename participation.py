@@ -22,3 +22,13 @@ class Participation:
             event_participants = cursor.fetchall()
             if event_participants:
                 return event_participants
+
+    def load_participating_in_events(participant_id):
+        with CursorFromConnectionFromPool() as cursor:
+            cursor.execute('select FirstSet.id, FirstSet.event_description, FirstSet.event_date from (SELECT event_description, event_date, id FROM events) as FirstSet inner join (SELECT event_id FROM participation WHERE participant_id = %s) as SecondSet ON FirstSet.id = SecondSet.event_id', (participant_id,))
+            event_data = cursor.fetchall()
+            list_of_events = []
+            if event_data:
+                for event in event_data:
+                    list_of_events.append(event)
+                return list_of_events

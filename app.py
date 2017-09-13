@@ -94,16 +94,40 @@ def joinevent():
 
     return render_template('joinconfirmation.html', user=g.user, event_id=event_id)
 
+@app.route('/bailout')
+def bailfromevent():
+    event_id = request.args.get('event_id')
+    participant_id = g.user.id
+    return 0
 
-@app.route('/events')
-def list_events():
-    # we want to show the events where the users is the organizer and events where the user is the participant.
+@app.route('/events_old')
+def list_events_old():
     event = Event.load_from_db_by_organizer_id(int(g.user.id))
     if event != None:
         participants = Participation.load_event_participant_names(event.id)
     else:
         return render_template('events.html', message="No events found")
     return render_template('events.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_id=event.id, participants=participants)
+
+@app.route('/events')
+def list_events():
+    # we want to show the events where the users is the organizer and events where the user is the participant.
+    events = Event.load_from_db_all_events_by_organizer_id(int(g.user.id))
+
+    # TODO: load the events in which I'm a participant. Start with SQL in the pgAdmin
+    event_participant = Participation.load_participating_in_events(int(g.user.id))
+
+
+    # TODO: make it pretty, load the events in a table (take from workbench)
+    if events == None and event_participant == None:
+        return render_template('events.html', message="No events found")
+    elif events == None and event_participant != None:
+        return render_template('events.html', participant=event_participant, message="organizeronly")
+    elif event_participant == None and events != None:
+        return render_template('events.html', events=events, message="participantonly")
+    else:
+        return render_template('events.html', events=events, participant=event_participant, message="participantandorganizer")
+
 
 @app.route('/workbench')
 def workbench_list_all_events():

@@ -61,3 +61,12 @@ class Event:
                 return list_of_events
                 #return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=[3], event_footprint=event_data[4], id=event_data[0])
 
+    def load_from_db_all_events_by_organizer_id(organizer_id):
+        with CursorFromConnectionFromPool() as cursor:
+            cursor.execute('SELECT * FROM events WHERE organizer_id=%s', (organizer_id,))
+            event_data = cursor.fetchall()
+            list_of_events = []
+            if event_data:
+                for event in event_data:
+                    list_of_events.append(event)
+                return list_of_events
