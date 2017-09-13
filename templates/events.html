@@ -39,7 +39,7 @@
                       <td>{{ event[2] }}</td>
                       <td>{{ event[3] }}</td>
                       <td>{{ event[4] }}</td>
-                      <td>TODO: <a href="{{ url_for('joinevent', event_id=event[0]) }}">Remove</a></td>
+                      <td><a href="{{ url_for('cancelevent', event_id=event[0]) }}">Cancel</a></td>
                     </tr>
             {% endfor %}
       </tbody>
@@ -62,7 +62,7 @@
                     <td>{{participant_instance[0]}}</td>
                     <td>{{ participant_instance[1] }}</td>
                     <td>{{ participant_instance[2] }}</td>
-                    <td>TODO: <a href="{{ url_for('bailfromevent', event_id=participant_instance[0]) }}">Bail Out</a></td>
+                    <td><a href="{{ url_for('bailfromevent', event_id=participant_instance[0]) }}">Bail Out</a></td>
                   </tr>
           {% endfor %}
     </tbody>

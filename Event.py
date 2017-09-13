@@ -70,3 +70,11 @@ class Event:
                 for event in event_data:
                     list_of_events.append(event)
                 return list_of_events
+
+    def delete_event(event_id, organizer_id):
+        with CursorFromConnectionFromPool() as cursor:
+            cursor.execute('DELETE FROM events WHERE id = %s AND organizer_id=%s', (event_id, organizer_id,))
+            #execution_result = cursor.execute()
+            rows_deleted = cursor.rowcount
+            if rows_deleted:
+                return rows_deleted

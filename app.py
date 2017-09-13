@@ -99,7 +99,14 @@ def bailfromevent():
     event_id = request.args.get('event_id')
     participant_id = g.user.id
     bailout_result = Participation.delete_participant_from_event(event_id, participant_id)
-    return render_template('confirmation.html', message="You bailed out of the event.")
+    return render_template('confirmation.html', user=g.user, message="You bailed out of the activity.")
+
+@app.route('/cancelevent')
+def cancelevent():
+    event_id = request.args.get('event_id')
+    participant_id = g.user.id
+    cancel_result = Event.delete_event(event_id, participant_id)
+    return render_template('confirmation.html', user=g.user, message="You cancelled the activity.")
 
 @app.route('/events_old')
 def list_events_old():
