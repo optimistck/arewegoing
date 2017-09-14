@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block header_title_lead %}{% endblock %}
+
+{% block navbar %}| <a href="{{ url_for('twitter_login') }}">Login with Twitter</a> to start{% endblock %}
+
+{% block content %}
+
+    <h3>This is the simplest way to gauge group's interest</h3>
+    <p class="lead">
+        <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+        <a href="{{ url_for('twitter_login') }}">Login with Twitter</a> to create an activity and see if we're going.
+    </p>
+
+
+    <P></P>
+    <h4>Solve the "I will go if you will go" problem in 3 steps:</h4>
+    <UL>
+        <LI>Create activity</LI>
+        <LI>Announce event</LI>
+        <LI>Activity is a go once a minimum is met</LI>
+    </UL>
+<P></P>
+
+
+
+{% endblock %}

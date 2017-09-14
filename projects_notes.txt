@@ -3,3 +3,30 @@ Bugs
 can't delete an event if there are participants already signed-up for it. Now need to find all the participants, send them an email, and then delete. Or make the event inactive and hide it.
 
 arewegoing.com/?custom-name_of-event
+
+
+Cut due to debug from base.html:
+
+        {% block navbar %}
+        <nav class="navbar navbar-dark bg-dark">
+          <span class="navbar-text">
+                Are we going?
+                {% if user.screen_name %}
+                {{user.screen_name}}, let's make it happen
+                <button class="btn btn-sm align-right btn-outline-secondary" type="button"><a href="{{ url_for('logout') }}">Logout</a></button>
+                {% elif path != "/" and path != "/login/" %}
+                Log in to setup activities or commit to participation
+
+                {% endif %}
+          </span>
+        </nav>
+        {% endblock %}
+
+
+
+
+                {% if user.screen_name %}
+
+                {% elif %}
+
+                {% endif %}

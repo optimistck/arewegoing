@@ -17,13 +17,20 @@ Database.initialize(host='localhost', database='iwillgoifyougo', user='postgres'
 
 @app.before_request
 def load_user():
+    g.user = None
     if 'screen_name' in session: #is there a key screen_name in session
         g.user = User.load_from_db_by_screen_name(session['screen_name'])
 
 #this is a decorator. #when we access the '/' end point, call this method
 @app.route('/')
 def homepage():
+    if not g.user:
+        return redirect(url_for('start'))
     return render_template('home.html')
+
+@app.route('/start')
+def start():
+    return render_template('start.html')
 
 
 @app.route('/login/twitter')
@@ -70,6 +77,8 @@ def profile():
 
 @app.route('/event')
 def event():
+    if not g.user:
+        return render_template('msg.html', message="Please login to post an activity.")
     return render_template('event.html', user=g.user)
 
 @app.route('/event_confirmation')

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block header_title_lead %}{% endblock %}
+
+{% block navbar %}<a href="{{ url_for('twitter_login') }}">Login with Twitter</a>{% endblock %}
+
+{% block content %}
+
+  <h3>Hi there...</h3>
+
+  <div class="alert alert-success" role="alert">
+  {{message}}
+</div>
+
+
+
+{% endblock %}

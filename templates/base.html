@@ -5,27 +5,23 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Are We Going?</title>
+    <title>AreWeGoing.com</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+      <script src="https://use.fontawesome.com/eefeaaa5ff.js"></script>
   </head>
   <body>
 
     <div id="page">
-        {% block navbar %}
+
         <nav class="navbar navbar-dark bg-dark">
           <span class="navbar-text">
-                Are we going?
-                {% if user.screen_name %}
-                {{user.screen_name}}, let's make it happen
-                <button class="btn btn-sm align-right btn-outline-secondary" type="button"><a href="{{ url_for('logout') }}">Logout</a></button>
-                {% elif path != "/" and path != "/login/" %}
-                Log in to setup activities or commit to participation
+                <a href="{{ url_for('homepage') }}"><i class="fa fa-calendar" aria-hidden="true"></i></a> AreWeGoing.com
 
-                {% endif %}
+             {% block navbar %}{% endblock %}
           </span>
         </nav>
-        {% endblock %}
+
 
         <div id="content" class="container">
             {% block header %}{% endblock %}
