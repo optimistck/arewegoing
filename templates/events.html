@@ -3,6 +3,7 @@
 {% block header_title_lead %}{% endblock %}
 
 {% block navbar %} |
+<a href="{{ url_for('event') }}">New Event</a> |
 <a href="{{ url_for('logout') }}">Log out</a>
 
 {% endblock %}
@@ -11,21 +12,24 @@
 
 
 
-  <h1>Listing of Events</h1>
 
-    <p class="lead">
-    Your commitments:
+
+
+
       {% if message == 'organizeronly' or message == 'participantandorganizer' or message == 'participantonly' %}
-
+<h1>Your commitments</h1>
       {% else %}
-            None. Go ahead and <a href="{{ url_for('event') }}">create an activity</a>.
+            <H1>No events</H1>
+            <p class="lead">
+              Go ahead and <a href="{{ url_for('event') }}">create an activity</a>. This app is the simplest way to gauge group's interest. Give it a go.
+            </p>
       {% endif %}
-    </p>
+
 
 
     <div class="container">
         {% if message == 'organizeronly' or message == 'participantandorganizer' %}
-      <H3>You're the organizer for ...</H3>
+      <H3>Organizer for ...</H3>
       <table class="table table-hover">
       <thead>
         <tr>
@@ -53,7 +57,7 @@
         {% endif %}
 
         {% if message == 'participantonly' or message == 'participantandorganizer' %}
-    <H3>You're a participant for ...</H3>
+    <H3>Participant for ...</H3>
     <table class="table table-hover">
     <thead>
       <tr>
