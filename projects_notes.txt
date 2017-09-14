@@ -2,3 +2,4 @@ Bugs
 
 can't delete an event if there are participants already signed-up for it. Now need to find all the participants, send them an email, and then delete. Or make the event inactive and hide it.
 
+arewegoing.com/?custom-name_of-event

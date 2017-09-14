@@ -179,5 +179,9 @@ def search():
 
     return render_template('search.html', content=tweet_texts)
 
+@app.route('/t')
+def tester():
+    return render_template('tester.html', user="FakeTestUser")
+
 
 app.run(port=4995, debug=True)

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block header_title_lead %}{% endblock %}
+
+{% block content %}
+
+    {% if user %}
+    <div class="hero-unit home_bp">
+        <h1>
+            {{user.screen_name}}, you are logged in
+        </h1>
+
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="span3 auth-at-home">
+
+            <h3>Stuff to do if not logged in</h3>
+
+        </div>
+    </div><!-- /row -->
+    {% endif %}
+
+{% endblock %}
+
