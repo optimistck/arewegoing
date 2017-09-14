@@ -18,20 +18,27 @@
         <tr>
           <th>Description</th>
           <th>Date</th>
+          <th>I will go if you go</th>
+          <th>Email</th>
+          <th>Confirm</th>
         </tr>
       </thead>
       <tbody>
-            {% for event in events %}
                     <tr>
-                      <td>{{ description}}</td>
-                      <td>{{ date }}</td>
+                      <td>{{description}}</td>
+                      <td>{{date}}</td>
+
+                      <form action="{{ url_for('joinevent')}}">
+                      <td><input type="text" name="person_name" id="person_name" placeholder="Your Name"></td>
+                        <td><input type="text" name="email" id="email" placeholder="we@dont.spam"></td>
+                      <td><button type = "submit" class="btn btn-primary">Let's do it</button></td>
+                        <INPUT type="password" style="display:none" name="event_id" value={{event_id}}>
+                      </form>
                     </tr>
-            {% endfor %}
       </tbody>
       </table>
 
   </div>
-
 
 
     <!-- Optional JavaScript -->

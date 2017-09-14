@@ -5,6 +5,7 @@ from database import Database
 import requests
 from event import Event
 from participation import Participation
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -157,13 +158,9 @@ def workbench_list_all_events():
 
 @app.route('/showevent')
 def show_event():
-    #NEXT:
-    #make a call to find out the name of the organizer
-    #make a call to find out the event items
-    #TODO THIS IS BROKEN
     event_footprint = request.args.get('event_footprint')
     event = Event.load_event_from_db_by_event_footprint(event_footprint)
-    return  render_template('showevent.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_footprint=event.event_footprint)
+    return  render_template('showevent.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id)
 
 @app.route('/search') #make dynamic
 def search():
