@@ -2,28 +2,22 @@
 
 {% block header_title_lead %}{% endblock %}
 
+{% block navbar %} |
+<a href="{{ url_for('list_events') }}">My Activities</a> |
+<a href="{{ url_for('event') }}">New Event</a> |
+<a href="{{ url_for('logout') }}">Log out</a>
+{% endblock %}
+
 {% block content %}
 
-  <h1>Action Confirmation</h1>
+
+
+  <h1>Confirmation</h1>
 
   <div class="alert alert-success" role="alert">
   OK, {{ user.screen_name }}. {{message}}
 </div>
 
-  <h3>Where to next?</h3>
-  <ul class="nav nav-pills nav-fill">
-  <li class="nav-item">
-    <a class="nav-link" href="/">Home Page</a>
-  </li>
-  <li class="nav-item">
-    <a href="{{ url_for('list_events') }}">My Events</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Something else 2</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#">Something else 3</a>
-  </li>
-</ul>
+
 
 {% endblock %}

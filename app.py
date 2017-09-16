@@ -109,14 +109,14 @@ def bailfromevent():
     event_id = request.args.get('event_id')
     participant_id = g.user.id
     bailout_result = Participation.delete_participant_from_event(event_id, participant_id)
-    return render_template('confirmation.html', user=g.user, message="You bailed out of the activity.")
+    return render_template('confirmation.html', user=g.user, message="You bailed out of the activity. Why not create your own event?")
 
 @app.route('/cancelevent')
 def cancelevent():
     event_id = request.args.get('event_id')
     participant_id = g.user.id
     cancel_result = Event.delete_event(event_id, participant_id)
-    return render_template('confirmation.html', user=g.user, message="You cancelled the activity.")
+    return render_template('confirmation.html', user=g.user, message="You cancelled the activity. There is no undo, but you can create a new event.")
 
 @app.route('/canceleventwithafoot')
 def canceleventwithafootprint():
@@ -124,7 +124,7 @@ def canceleventwithafootprint():
     event_id = Event.get_event_id_from_event_footprint(event_footprint)
     participant_id = g.user.id
     cancel_result = Event.delete_event(event_id[0], participant_id)
-    return render_template('confirmation.html', user=g.user, message="You cancelled the activity.")
+    return render_template('confirmation.html', user=g.user, message="You cancelled the activity. There is no undo, but you can create a new event.")
 
 @app.route('/events_old')
 def list_events_old():

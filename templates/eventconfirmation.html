@@ -11,7 +11,7 @@
 {% block content %}
   <h1>Event Created</h1>
       <div class="container">
-      <H3>Activity Details</H3>
+
       <table class="table table-hover">
       <thead>
         <tr>
@@ -24,16 +24,16 @@
                     <tr>
                       <td>{{ description}}</td>
                       <td>{{ date }}</td>
-                      <td><a href="{{ url_for('canceleventwithafootprint', event_footprint=event_footprint) }}">Cancel Event</a></td>
+                      <td><a href="{{ url_for('canceleventwithafootprint', event_footprint=event_footprint) }}"><i class="fa fa-times-circle" aria-hidden="true"></i> Cancel Event</a></td>
                     </tr>
       </tbody>
       </table>
-
-        <H3>Next Step</H3>
+  </div>
+        <H1>Next Step: Invite Participants</H1>
         <p class="lead">
         <i class="fa fa-hand-o-right" aria-hidden="true"></i>
-        Share this link with friends: http://127.0.0.1:4995/showevent?event_footprint={{event_footprint}}
+        Email or message this link: http://127.0.0.1:4995/showevent?event_footprint={{event_footprint}}
     </p>
-  </div>
+
 
 {% endblock %}

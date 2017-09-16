@@ -1,0 +1,12 @@
+a.special:link, a.special:visited {
+    color: #447e9b;
+    text-decoration: none;
+}
+
+a.special:focus, a.special:hover {
+    color: #036;
+}
+
+a.special:focus {
+    text-decoration: underline;
+}

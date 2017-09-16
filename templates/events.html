@@ -11,11 +11,6 @@
 {% block content %}
 
 
-
-
-
-
-
       {% if message == 'organizeronly' or message == 'participantandorganizer' or message == 'participantonly' %}
 <h1>Your commitments</h1>
       {% else %}
@@ -29,27 +24,24 @@
 
     <div class="container">
         {% if message == 'organizeronly' or message == 'participantandorganizer' %}
-      <H3>Organizer for ...</H3>
-      <table class="table table-hover">
+
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-edit"></i> Organizer for ...</h3>
+        </div>
+      <table class="table table-striped">
       <thead>
         <tr>
-          <th>Event ID</th>
-          <th>Description</th>
-          <th>Date</th>
-          <th>Organizer ID</th>
-          <th>Event Footprint</th>
-          <th>Remove?</th>
+          <th>What</th>
+          <th>When</th>
+          <th>Cancel?</th>
         </tr>
       </thead>
       <tbody>
             {% for event in events %}
                     <tr>
-                      <td>{{ event[0] }}</td>
                       <td>{{ event[1] }}</td>
                       <td>{{ event[2] }}</td>
-                      <td>{{ event[3] }}</td>
-                      <td>{{ event[4] }}</td>
-                      <td><a href="{{ url_for('cancelevent', event_id=event[0]) }}">Cancel</a></td>
+                      <td><a href="{{ url_for('cancelevent', event_id=event[0]) }}"><i class="fa fa-trash-o"></i> Cancel</a></td>
                     </tr>
             {% endfor %}
       </tbody>
@@ -57,23 +49,24 @@
         {% endif %}
 
         {% if message == 'participantonly' or message == 'participantandorganizer' %}
-    <H3>Participant for ...</H3>
-    <table class="table table-hover">
+
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-thumbs-o-up"></i> Participant for ...</h3>
+        </div>
+    <table class="table table-striped">
     <thead>
       <tr>
-        <th>event id (temp)</th>
         <th>Description</th>
         <th>Date</th>
-        <th>Remove?</th>
+        <th>No Go?</th>
       </tr>
     </thead>
     <tbody>
           {% for participant_instance in participant %}
                   <tr>
-                    <td>{{participant_instance[0]}}</td>
                     <td>{{ participant_instance[1] }}</td>
                     <td>{{ participant_instance[2] }}</td>
-                    <td><a href="{{ url_for('bailfromevent', event_id=participant_instance[0]) }}">Bail Out</a></td>
+                    <td><a href="{{ url_for('bailfromevent', event_id=participant_instance[0]) }}"><i class="fa fa-user-times"></i> Bail Out</a></td>
                   </tr>
           {% endfor %}
     </tbody>

@@ -5,19 +5,20 @@
 {% block navbar %} |
 <a href="{{ url_for('list_events') }}">My Activities</a> |
 <a href="{{ url_for('logout') }}">Log out</a>
-
 {% endblock %}
 
 {% block content %}
 
-    <h3>Menu</h3>
-    <UL>
-        <LI><a href="{{ url_for('list_events') }}">View and manage activities</a></LI>
-        <LI><a href="{{ url_for('event') }}">Create an activity</a></LI>
-        <LI><a href="{{ url_for('workbench_list_all_events') }}">List all events - Workbench - TEMP</a></LI>
+    <h1>Menu</h1>
 
 
 
-    </UL>
+<p class="lead"><a href="{{ url_for('list_events') }}"><i class="fa fa-calendar" aria-hidden="true"></i> View and manage activities</a></p>
+<p class="lead"><a href="{{ url_for('event') }}"><i class="fa fa-edit"></i> Create an activity</a></p>
+<p class="lead"><a href="{{ url_for('workbench_list_all_events') }}"><i class="fa fa-wrench" aria-hidden="true"></i> List all events - Workbench - TEMP</a></p>
+
+
+
+
 
 {% endblock %}
