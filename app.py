@@ -52,7 +52,7 @@ def twitter_login():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('homepage')) #redirects to the METHOD home page.
+    return redirect(url_for('homepage'))
 
 
 @app.route('/auth/twitter') #http://127.0.0.1:4995/auth/twitter?oauth_token=utbuKQAAAAAA2DxrAA
@@ -70,9 +70,11 @@ def twitter_auth():
 
     return redirect(url_for('event')) #user.screen_name
 
-
+#TODO remove this
 @app.route('/profile')
 def profile():
+    if not g.user:
+        return render_template('msg.html', message="Please login to post an activity.")
     return render_template('profile.html', user=g.user)
 
 @app.route('/event')
@@ -83,6 +85,8 @@ def event():
 
 @app.route('/event_confirmation')
 def eventconfirmation():
+    if not g.user:
+        return render_template('msg.html', message="Please login to perform event confirmation.")
     description = request.args.get('description')
     date = request.args.get('date')
     organizer_id = g.user.id
@@ -93,12 +97,11 @@ def eventconfirmation():
     return render_template('eventconfirmation.html', user=g.user, description=description, date=date, organizer_id=organizer_id, event_footprint=event_footprint)
 
 
+#TODO this one is OK (check) to join event without being signed in
 @app.route('/join_event')
 def joinevent():
     event_id = request.args.get('event_id')
     participant_id = g.user.id
-
-    # store into the database
     participation = Participation(event_id=event_id, participant_id=participant_id, joined_date=None, id=None)
     participation.save_to_db()
 
@@ -106,6 +109,8 @@ def joinevent():
 
 @app.route('/bailout')
 def bailfromevent():
+    if not g.user:
+        return render_template('msg.html', message="Please login to bail out of activity.")
     event_id = request.args.get('event_id')
     participant_id = g.user.id
     bailout_result = Participation.delete_participant_from_event(event_id, participant_id)
@@ -113,6 +118,8 @@ def bailfromevent():
 
 @app.route('/cancelevent')
 def cancelevent():
+    if not g.user:
+        return render_template('msg.html', message="Please login to cancel an event.")
     event_id = request.args.get('event_id')
     participant_id = g.user.id
     cancel_result = Event.delete_event(event_id, participant_id)
@@ -120,14 +127,19 @@ def cancelevent():
 
 @app.route('/canceleventwithafoot')
 def canceleventwithafootprint():
+    if not g.user:
+        return render_template('msg.html', message="Please login to cancel an event.")
     event_footprint = request.args.get('event_footprint')
     event_id = Event.get_event_id_from_event_footprint(event_footprint)
     participant_id = g.user.id
     cancel_result = Event.delete_event(event_id[0], participant_id)
     return render_template('confirmation.html', user=g.user, message="You cancelled the activity. There is no undo, but you can create a new event.")
 
+#TODO: delete this?
 @app.route('/events_old')
 def list_events_old():
+    if not g.user:
+        return render_template('msg.html', message="Please login to cancel an event.")
     event = Event.load_from_db_by_organizer_id(int(g.user.id))
     if event != None:
         participants = Participation.load_event_participant_names(event.id)
@@ -137,6 +149,8 @@ def list_events_old():
 
 @app.route('/events')
 def list_events():
+    if not g.user:
+        return render_template('msg.html', message="Please login to see events.")
     # we want to show the events where the users is the organizer and events where the user is the participant.
     events = Event.load_from_db_all_events_by_organizer_id(int(g.user.id))
     event_participant = Participation.load_participating_in_events(int(g.user.id))
@@ -150,7 +164,7 @@ def list_events():
     else:
         return render_template('events.html', events=events, participant=event_participant, message="participantandorganizer")
 
-
+#TODO: remove before going live
 @app.route('/workbench')
 def workbench_list_all_events():
     #list all the events regardless whether a user has the right to see it or not
@@ -165,14 +179,19 @@ def workbench_list_all_events():
     #return render_template('workbench.html', description=event.event_description, date=event.event_date, organizer_id=event.organizer_id, event_id=event.id, participants=participants)
     return render_template('workbench.html', events=events)
 
+
 @app.route('/showevent')
 def show_event():
     event_footprint = request.args.get('event_footprint')
     event = Event.load_event_from_db_by_event_footprint(event_footprint)
     return  render_template('showevent.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id)
 
+
+#TODO remove before going live
 @app.route('/search') #make dynamic
 def search():
+    if not g.user:
+        return render_template('msg.html', message="Please login to perform a search.")
     query = request.args.get('q')
     tweets = g.user.twitter_request('https://api.twitter.com/1.1/search/tweets.json?q={}'.format(query))
     #putting the tweets into a dictionary. To get a dictionary of dictionaries. Now we're appending a dict for each tweet
@@ -188,6 +207,7 @@ def search():
 
     return render_template('search.html', content=tweet_texts)
 
+#TODO remove before going live
 @app.route('/t')
 def tester():
     return render_template('tester.html', user="FakeTestUser")
