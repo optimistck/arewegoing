@@ -180,9 +180,9 @@ def workbench_list_all_events():
     return render_template('workbench.html', events=events)
 
 
-@app.route('/showevent')
+@app.route('/to')
 def show_event():
-    event_footprint = request.args.get('event_footprint')
+    event_footprint = request.args.get('this')
     event = Event.load_event_from_db_by_event_footprint(event_footprint)
     return  render_template('showevent.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id)
 
