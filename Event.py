@@ -36,12 +36,19 @@ class Event:
             event_data = cursor.fetchone()
             #but we really need to fetch more than one in the future! Not just the first one.
             if event_data:
-                return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=[3], event_footprint=event_data[4], id=event_data[0])
+                return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=[3], event_footprint=event_data[4], id=event_data[0],)
 
     @classmethod
     def load_event_from_db_by_event_footprint(cls, event_footprint):
         with CursorFromConnectionFromPool() as cursor:
             cursor.execute('select * from events where event_footprint = %s', (event_footprint,))
+            event_data = cursor.fetchone()
+            if event_data:
+                return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=event_data[3], event_footprint=event_data[4], id=event_data[0], )
+    @classmethod
+    def load_event_from_db_by_event_id(cls, id):
+        with CursorFromConnectionFromPool() as cursor:
+            cursor.execute('select * from events where id = %s', (id,))
             event_data = cursor.fetchone()
             if event_data:
                 return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=event_data[3], event_footprint=event_data[4], id=event_data[0], )

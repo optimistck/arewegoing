@@ -6,12 +6,12 @@
 
     <div class="container">
       <H3>Activity Details</H3>
-      <table class="table table-hover">
+      <table class="table table-responsive">
       <thead>
         <tr>
           <th>Description</th>
           <th>Date</th>
-          <th>I will go if you go</th>
+          <th>We need +1</th>
           <th>Email</th>
           <th>Yeah?</th>
         </tr>
@@ -22,7 +22,7 @@
                       <td>{{date}}</td>
 
                       <form action="{{ url_for('joinevent')}}">
-                      <td><input type="text" name="person_name" id="person_name" placeholder="Your Name"></td>
+                      <td><input type="text" name="person_name" id="name" placeholder="Your Name"></td>
                         <td><input type="text" name="email" id="email" placeholder="we@dont.spam"></td>
                       <td><button type = "submit" class="btn btn-primary">Let's do it</button></td>
                         <INPUT type="password" style="display:none" name="event_id" value={{event_id}}>
@@ -32,6 +32,8 @@
       </table>
 
   </div>
+<P></P>
+E-mail will be visible to the organizer. Never sold or misused by AreWeGoing.com
 
 {% endblock %}
 

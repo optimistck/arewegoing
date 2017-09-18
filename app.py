@@ -100,12 +100,21 @@ def eventconfirmation():
 #TODO this one is OK (check) to join event without being signed in
 @app.route('/join_event')
 def joinevent():
+    if not g.user:
+        #do stuff to make an entry and confirm without the login in. And then add login info.
+        #do create user.
+        name = request.args.get('person_name')
+        email = request.args.get('email')
+        user = User(None, None, None, None, name, email)
+        user.save_to_db_by_email()
+        g.user = User.load_from_db_by_email(email)
+        #return render_template('msg.html', message="User based on email created successfully")
     event_id = request.args.get('event_id')
     participant_id = g.user.id
     participation = Participation(event_id=event_id, participant_id=participant_id, joined_date=None, id=None)
     participation.save_to_db()
-
-    return render_template('joinconfirmation.html', user=g.user, event_id=event_id)
+    event = Event.load_event_from_db_by_event_id(event_id)
+    return render_template('joinconfirmation.html', name=name, description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id)
 
 @app.route('/bailout')
 def bailfromevent():
