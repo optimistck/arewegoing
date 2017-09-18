@@ -207,6 +207,12 @@ def search():
 
     return render_template('search.html', content=tweet_texts)
 
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
 #TODO remove before going live
 @app.route('/t')
 def tester():
