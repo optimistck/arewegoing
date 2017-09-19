@@ -3,11 +3,11 @@ DROP TABLE IF EXISTS "public"."users" CASCADE;
 CREATE TABLE users
 (
 	id SERIAL PRIMARY KEY,
-	screen_name text,
-    oauth_token text,
-    oauth_token_secret text,
-    name text,
-    email text
+	screen_name varchar(50),
+    oauth_token varchar(50),
+    oauth_token_secret varchar(50),
+    name varchar(50),
+    email varchar(40)
 );
 
 
@@ -19,7 +19,9 @@ CREATE TABLE events
     event_description text NOT NULL,
     event_date TIMESTAMP NOT NULL,
     organizer_id int4 REFERENCES users(id) NOT NULL,
-    event_footprint varchar(9)
+    event_footprint varchar(9),
+    min_participants int2,
+    participants_count int2
 );
 
 

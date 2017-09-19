@@ -63,7 +63,7 @@ def twitter_auth():
     #encountered an error here, because the database was not initialized
     user = User.load_from_db_by_screen_name(access_token['screen_name'])
     if not user: #then create a new one
-        user = User(access_token['screen_name'], access_token['oauth_token'], access_token['oauth_token_secret'], None)
+        user = User(access_token['screen_name'], access_token['oauth_token'], access_token['oauth_token_secret'], None, None, None)
         user.save_to_db()
 
     session['screen_name'] = user.screen_name
@@ -86,15 +86,16 @@ def event():
 @app.route('/event_confirmation')
 def eventconfirmation():
     if not g.user:
-        return render_template('msg.html', message="Please login to perform event confirmation.")
+        return render_template('msg.html', message="Please login to create an event.")
     description = request.args.get('description')
     date = request.args.get('date')
+    min_participants = request.args.get('min_participants')
     organizer_id = g.user.id
     event_footprint = get_event_footprint()
     #store into the database
-    event = Event(description, date, organizer_id, event_footprint, None)
+    event = Event(description, date, organizer_id, event_footprint, None, min_participants,)
     event.save_to_db()
-    return render_template('eventconfirmation.html', user=g.user, description=description, date=date, organizer_id=organizer_id, event_footprint=event_footprint)
+    return render_template('eventconfirmation.html', user=g.user, description=description, date=date, organizer_id=organizer_id, event_footprint=event_footprint, min_participants=min_participants)
 
 
 #TODO this one is OK (check) to join event without being signed in

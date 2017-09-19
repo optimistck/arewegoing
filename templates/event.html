@@ -16,11 +16,21 @@
     {{ user.screen_name }}, where are we going?
     </p>
     <form action="{{ url_for('eventconfirmation') }}">
-        <label for="description">Event description</label>
-        <input type="text" name="description" id="description" placeholder="What are we doing?">
-        <label for="date">Date & Time</label>
-        <input type="text" name="date" id="date" placeholder="e.g., 2018-11-28 5:00 PM">
-        <button type = "submit" class="btn btn-primary">Create Event</button>
+        <P>
+            <label for="description">Event description</label>
+            <input type="text" name="description" id="description" placeholder="What are we doing?">
+        </P>
+        <P>
+            <label for="date">Date & Time</label>
+            <input type="text" name="date" id="date" placeholder="e.g., 2018-11-28 5:00 PM">
+        </P>
+        <P>
+            <label for="date">Min to make it a "go"</label>
+          <input type="text" name="min_participants" id="min_participants" placeholder="e.g., ">
+        </P>
+        <P>
+            <button type = "submit" class="btn btn-primary">Create Event</button>
+        </P>
     </form>
 
 {% endblock %}
