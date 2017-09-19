@@ -196,6 +196,12 @@ def show_event():
     event = Event.load_event_from_db_by_event_footprint(event_footprint)
     return  render_template('showevent.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id)
 
+@app.route('/eventdetails')
+def eventdetails():
+    event_footprint = request.args.get('this')
+    event = Event.load_event_from_db_by_event_footprint(event_footprint)
+    return  render_template('eventdetails.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id)
+
 
 #TODO remove before going live
 @app.route('/search') #make dynamic
