@@ -4,27 +4,50 @@
 
 {% block content %}
 
+  <div class="container">
+    <H3>Activity Details</H3>
+       <p class="lead">
+        "{{description}}" on {{date}}.
+        </p>
+  </div>
+
+
     <div class="container">
-      <H3>Activity Details</H3>
+      {% if participants != None %}
+
+      <H3>Participants</H3>
       <table class="table table-responsive">
       <thead>
         <tr>
-          <th>Description</th>
-          <th>Date</th>
+          <th>Name</th>
+          <th>Email</th>
         </tr>
       </thead>
       <tbody>
+            {% for participant in participants %}
                     <tr>
-                      <td>{{description}}</td>
-                      <td>{{date}}</td>
+                      <td>{{ participant[0] }}</td>
+                      <td>{{ participant[1] }}</td>
                     </tr>
+            {% endfor %}
       </tbody>
       </table>
-
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+        <h6>No participants signed-up. Send a link to some!</h6>
+        </div>
+    {% endif %}
   </div>
-<P></P>
-Here are the participants...
 
+
+
+  <div class="container">
+    <h3>Invite participants</h3>
+        <p class="lead">
+        <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+        Email or message this link: http://127.0.0.1:4995/to?this={{event_footprint}}
+        </p>
+  </div>
 
 
 

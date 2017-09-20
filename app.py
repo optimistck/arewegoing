@@ -101,11 +101,11 @@ def eventconfirmation():
 #TODO this one is OK (check) to join event without being signed in
 @app.route('/join_event')
 def joinevent():
+    name = request.args.get('person_name')
+    email = request.args.get('email')
     if not g.user:
         #do stuff to make an entry and confirm without the login in. And then add login info.
         #do create user.
-        name = request.args.get('person_name')
-        email = request.args.get('email')
         user = User(None, None, None, None, name, email)
         user.save_to_db_by_email()
         g.user = User.load_from_db_by_email(email)
@@ -194,13 +194,17 @@ def workbench_list_all_events():
 def show_event():
     event_footprint = request.args.get('this')
     event = Event.load_event_from_db_by_event_footprint(event_footprint)
-    return  render_template('showevent.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id)
+    return  render_template('showevent.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=str(event.id[0]))
 
 @app.route('/eventdetails')
 def eventdetails():
+    if not g.user:
+        return render_template('msg.html', message="Please login to see event participants.")
     event_footprint = request.args.get('this')
     event = Event.load_event_from_db_by_event_footprint(event_footprint)
-    return  render_template('eventdetails.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id)
+    event_id = Event.get_event_id_from_event_footprint(event_footprint)
+    participants = Participation.load_event_participant_names(event_id[0])
+    return  render_template('eventdetails.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id, event_footprint=event_footprint, participants=participants)
 
 
 #TODO remove before going live
