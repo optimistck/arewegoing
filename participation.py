@@ -18,7 +18,7 @@ class Participation:
 
     def load_event_participant_names(event_id):
         with CursorFromConnectionFromPool() as cursor:
-            cursor.execute('select SecondSet.name from (SELECT participant_id FROM participation WHERE event_id = %s) as FirstSet inner join (SELECT name, id FROM users) as SecondSet ON FirstSet.participant_id = SecondSet.id', (event_id,))
+            cursor.execute('select SecondSet.name, SecondSet.email from (SELECT participant_id FROM participation WHERE event_id = %s) as FirstSet inner join (SELECT name, email, id FROM users) as SecondSet ON FirstSet.participant_id = SecondSet.id', (event_id,))
             event_participants = cursor.fetchall()
             if event_participants:
                 return event_participants

@@ -93,7 +93,7 @@ def eventconfirmation():
     organizer_id = g.user.id
     event_footprint = get_event_footprint()
     #store into the database
-    event = Event(description, date, organizer_id, event_footprint, None, min_participants,)
+    event = Event(description, date, organizer_id, event_footprint, None, min_participants, 0)
     event.save_to_db()
     return render_template('eventconfirmation.html', user=g.user, description=description, date=date, organizer_id=organizer_id, event_footprint=event_footprint, min_participants=min_participants)
 
@@ -115,6 +115,7 @@ def joinevent():
     participation = Participation(event_id=event_id, participant_id=participant_id, joined_date=None, id=None)
     participation.save_to_db()
     event = Event.load_event_from_db_by_event_id(event_id)
+    Event.add_one_to_event(event_id)
     return render_template('joinconfirmation.html', name=name, description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id)
 
 @app.route('/bailout')
@@ -204,7 +205,7 @@ def eventdetails():
     event = Event.load_event_from_db_by_event_footprint(event_footprint)
     event_id = Event.get_event_id_from_event_footprint(event_footprint)
     participants = Participation.load_event_participant_names(event_id[0])
-    return  render_template('eventdetails.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id, event_footprint=event_footprint, participants=participants)
+    return render_template('eventdetails.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id, event_footprint=event_footprint, participants=participants, min_participants=event.min_participants[0], participants_count=event.participants_count)
 
 
 #TODO remove before going live

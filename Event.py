@@ -1,13 +1,15 @@
 from database import CursorFromConnectionFromPool
 
 class Event:
-    def __init__(self, event_description, event_date, organizer_id, event_footprint, id, min_participants):
+    def __init__(self, event_description, event_date, organizer_id, event_footprint, id, min_participants, participants_count):
         self.event_description = event_description,
         self.event_date = event_date,
         self.organizer_id = organizer_id,
         self.event_footprint = event_footprint,
         self.id = id,
-        self.min_participants = min_participants
+        self.min_participants = min_participants,
+        self.participants_count = participants_count
+
 
     def __repr__(self):
         return "<Event {}".format(self.event_description)
@@ -27,8 +29,8 @@ class Event:
 
     def save_to_db(self):
         with CursorFromConnectionFromPool() as cursor:
-            cursor.execute('INSERT INTO events (event_description, event_date, organizer_id, event_footprint, min_participants) VALUES (%s, %s, %s, %s, %s)',
-                           (self.event_description, self.event_date, self.organizer_id, self.event_footprint, self.min_participants))
+            cursor.execute('INSERT INTO events (event_description, event_date, organizer_id, event_footprint, min_participants, participants_count) VALUES (%s, %s, %s, %s, %s, %s)',
+                           (self.event_description, self.event_date, self.organizer_id, self.event_footprint, self.min_participants, 0))
 
     @classmethod
     def load_from_db_by_organizer_id(cls, organizer_id):
@@ -37,7 +39,7 @@ class Event:
             event_data = cursor.fetchone()
             #but we really need to fetch more than one in the future! Not just the first one.
             if event_data:
-                return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=[3], event_footprint=event_data[4], id=event_data[0], min_participants=event_data[5],)
+                return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=[3], event_footprint=event_data[4], id=event_data[0], min_participants=event_data[5], participants_count=event_data[6],)
 
     @classmethod
     def load_event_from_db_by_event_footprint(cls, event_footprint):
@@ -45,14 +47,14 @@ class Event:
             cursor.execute('select * from events where event_footprint = %s', (event_footprint,))
             event_data = cursor.fetchone()
             if event_data:
-                return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=event_data[3], event_footprint=event_data[4], id=event_data[0], min_participants=event_data[5],)
+                return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=event_data[3], event_footprint=event_data[4], id=event_data[0], min_participants=event_data[5], participants_count=event_data[6],)
     @classmethod
     def load_event_from_db_by_event_id(cls, id):
         with CursorFromConnectionFromPool() as cursor:
             cursor.execute('select * from events where id = %s', (id,))
             event_data = cursor.fetchone()
             if event_data:
-                return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=event_data[3], event_footprint=event_data[4], id=event_data[0], min_participants=event_data[5],)
+                return cls(event_description=event_data[1], event_date=event_data[2], organizer_id=event_data[3], event_footprint=event_data[4], id=event_data[0], min_participants=event_data[5], participants_count=event_data[6],)
 
 
     def workbench_load_all_events():
@@ -93,3 +95,11 @@ class Event:
             event_id = cursor.fetchone()
             if event_id:
                 return event_id
+
+        #UPDATE events SET participants_count = participants_count + 1 WHERE id = 12
+    def add_one_to_event(event_id):
+        with CursorFromConnectionFromPool() as cursor:
+            cursor.execute('UPDATE events SET participants_count = participants_count + 1 WHERE id = %s', (event_id,))
+            # rows_deleted = cursor.rowcount
+            # if rows_deleted:
+            #     return rows_deleted

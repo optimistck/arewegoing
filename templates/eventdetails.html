@@ -7,7 +7,7 @@
   <div class="container">
     <H3>Activity Details</H3>
        <p class="lead">
-        "{{description}}" on {{date}}.
+         "<STRONG>{{description}}</STRONG>" on <STRONG>{{date}}</STRONG>.
         </p>
   </div>
 
@@ -15,7 +15,7 @@
     <div class="container">
       {% if participants != None %}
 
-      <H3>Participants</H3>
+      <H3>Participants | Min needed: <span class="badge badge-secondary">{{min_participants}}</span> Interested: <span class="badge badge-secondary">{{participants_count}}</span></H3>
       <table class="table table-responsive">
       <thead>
         <tr>
