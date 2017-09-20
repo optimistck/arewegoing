@@ -38,7 +38,7 @@
       <tbody>
             {% for event in events %}
                     <tr>
-                      <td><a href="{{ url_for('eventdetails', this=event[4]) }}"><i class="fa fa-share-square-o" aria-hidden="true"></i> {{ event[1] }}</a></td>
+                      <td><a href="{{ url_for('eventdetails', this=event[4]) }}"><i class="fa fa-share-square-o" aria-hidden="true"></i> {{ event[1] }}</a> <span class="badge badge-secondary">{% if event[6] == None %}0{% else %}{{ event[6] }}{% endif %}/{{ event[5] }} </span> participants</td>
                       <td>{{ event[2] }}</td>
                       <td><a href="{{ url_for('cancelevent', event_id=event[0]) }}"><i class="fa fa-trash-o"></i> Cancel</a></td>
                     </tr>
