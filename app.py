@@ -35,6 +35,7 @@ def start():
 
 @app.route('/login/twitter')
 def twitter_login():
+    logout()
     #determine if the users is already logged in
     if 'screen_name' in session:
         return redirect(url_for('event'))
@@ -103,6 +104,14 @@ def eventconfirmation():
 def joinevent():
     name = request.args.get('person_name')
     email = request.args.get('email')
+    if g.user:
+        if (g.user.email == None) or (g.user.name == None):
+            user = User(g.user.screen_name, g.user.oauth_token, g.user.oauth_token_secret, g.user.id, name, email)
+            user.update_user_name_and_email()
+
+        #update the profile email and password if doesn't exist.
+        #if the email and name not filled out, fill it out. Else, pre-fill it.
+
     if not g.user:
         #do stuff to make an entry and confirm without the login in. And then add login info.
         #do create user.
@@ -193,9 +202,14 @@ def workbench_list_all_events():
 
 @app.route('/to')
 def show_event():
+    name = None
+    email = None
+    if g.user:
+        name = g.user.name
+        email = g.user.email
     event_footprint = request.args.get('this')
     event = Event.load_event_from_db_by_event_footprint(event_footprint)
-    return  render_template('showevent.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=str(event.id[0]))
+    return  render_template('showevent.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=str(event.id[0]), name=name, email=email)
 
 @app.route('/eventdetails')
 def eventdetails():

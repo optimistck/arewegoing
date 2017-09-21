@@ -28,6 +28,11 @@ class User:
 			cursor.execute('INSERT INTO users (name, email) VALUES (%s, %s)',
 				(self.name, self.email))
 
+	def update_user_name_and_email(self):
+		with CursorFromConnectionFromPool() as cursor:
+			cursor.execute('UPDATE users SET name = %s, email = %s WHERE id = %s',
+				(self.name, self.email, self.id))
+
 	@classmethod
 	def load_from_db_by_screen_name(cls, screen_name):
 		with CursorFromConnectionFromPool() as cursor:

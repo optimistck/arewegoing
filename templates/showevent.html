@@ -19,11 +19,11 @@
       <tbody>
                     <tr>
                       <td>{{description}}</td>
-                      <td>{{date}}</td>
+                      <td>{{date}}{{name}}{{email}}</td>
 
                       <form action="{{ url_for('joinevent')}}">
-                      <td><input type="text" name="person_name" id="name" placeholder="Your Name"></td>
-                        <td><input type="text" name="email" id="email" placeholder="we@dont.spam"></td>
+                      <td><input type="text" name="person_name" id="name" placeholder={{name}}></td>
+                        <td><input type="text" name="email" id="email" placeholder={{email}}></td>
                       <td><button type = "submit" class="btn btn-primary">Let's do it</button></td>
                         <INPUT type="password" style="display:none" name="event_id" value={{event_id}}>
                       </form>
