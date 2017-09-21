@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block header_title_lead %}{% endblock %}
-{% block navbar %}| <a href="{{ url_for('twitter_login') }}">Login with Twitter</a> to start{% endblock %}
+{% block navbar %}{% endblock %}
 {% block content %}
 
 
@@ -10,7 +10,7 @@
 
   <div class="alert alert-success" role="alert">
     <p class="lead">
-    {{ name }}, you're +1 for the <STRONG>{{ description }}</STRONG> event on <STRONG>{{ date }}</STRONG>. Please expect an email from the organizer on next steps once this is a "go".
+    You're +1 for the <STRONG>{{ description }}</STRONG> event on <STRONG>{{ date }}</STRONG>. Please expect an email from the organizer on next steps once this is a "go".
     </p>
   </div>
 

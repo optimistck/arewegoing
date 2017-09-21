@@ -96,10 +96,11 @@ class Event:
             if event_id:
                 return event_id
 
-        #UPDATE events SET participants_count = participants_count + 1 WHERE id = 12
     def add_one_to_event(event_id):
         with CursorFromConnectionFromPool() as cursor:
             cursor.execute('UPDATE events SET participants_count = participants_count + 1 WHERE id = %s', (event_id,))
-            # rows_deleted = cursor.rowcount
-            # if rows_deleted:
-            #     return rows_deleted
+
+    def minus_one_from_event(event_id):
+        with CursorFromConnectionFromPool() as cursor:
+            cursor.execute('UPDATE events SET participants_count = participants_count - 1 WHERE id = %s', (event_id,))
+

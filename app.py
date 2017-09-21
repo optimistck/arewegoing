@@ -133,7 +133,8 @@ def bailfromevent():
         return render_template('msg.html', message="Please login to bail out of activity.")
     event_id = request.args.get('event_id')
     participant_id = g.user.id
-    bailout_result = Participation.delete_participant_from_event(event_id, participant_id)
+    bailout_result = Participation.delete_participant_from_event(int(participant_id), int(event_id))
+    Event.minus_one_from_event(event_id)
     return render_template('confirmation.html', user=g.user, message="You bailed out of the activity. Why not create your own event?")
 
 @app.route('/cancelevent')
