@@ -29,6 +29,20 @@
       </tbody>
       </table>
   </div>
+    {% if name_email_status == None %}
+
+    <H5>One time thing... We'd like to tell you when the event reaches the minimum</H5>
+
+
+      <form action="{{ url_for('add_name_email')}}">
+        <td><input type="text" name="name" id="name" placeholder="Name"></td>
+        <td><input type="text" name="email" id="email" placeholder="Email"></td>
+        <td><button type = "submit" class="btn btn-primary">Do Tell</button></td>
+            <INPUT type="password" style="display:none" name="this" value={{event_footprint}}>
+      </form>
+    {% endif %}
+
+
         <H1>Final Step: Invite Participants</H1>
 
   <div class="alert alert-success" role="alert">

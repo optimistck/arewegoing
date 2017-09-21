@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
 {% block header_title_lead %}{% endblock %}
-
+{% block navbar %} |
+<a href="{{ url_for('list_events') }}">My Activities</a> |
+<a href="{{ url_for('logout') }}">Log out</a>
+{% endblock %}
 {% block content %}
 
   <div class="container">

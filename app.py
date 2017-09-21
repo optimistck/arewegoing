@@ -96,7 +96,11 @@ def eventconfirmation():
     #store into the database
     event = Event(description, date, organizer_id, event_footprint, None, min_participants, 0)
     event.save_to_db()
-    return render_template('eventconfirmation.html', user=g.user, description=description, date=date, organizer_id=organizer_id, event_footprint=event_footprint, min_participants=min_participants)
+
+    name_email_status = "Hello world"
+    if (g.user.email == None) or (g.user.name == None):
+        name_email_status = None
+    return render_template('eventconfirmation.html', user=g.user, description=description, date=date, organizer_id=organizer_id, event_footprint=event_footprint, min_participants=min_participants, name_email_status=name_email_status)
 
 
 #TODO this one is OK (check) to join event without being signed in
@@ -213,14 +217,30 @@ def show_event():
     return  render_template('showevent.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=str(event.id[0]), name=name, email=email)
 
 @app.route('/eventdetails')
-def eventdetails():
+def eventdetails(helper_event_footprint=None):
     if not g.user:
         return render_template('msg.html', message="Please login to see event participants.")
-    event_footprint = request.args.get('this')
+    if helper_event_footprint != None:
+        event_footprint = helper_event_footprint
+    else:
+        event_footprint = request.args.get('this')
     event = Event.load_event_from_db_by_event_footprint(event_footprint)
     event_id = Event.get_event_id_from_event_footprint(event_footprint)
     participants = Participation.load_event_participant_names(event_id[0])
     return render_template('eventdetails.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id, event_footprint=event_footprint, participants=participants, min_participants=event.min_participants[0], participants_count=event.participants_count)
+
+@app.route('/add_name_email')
+def add_name_email():
+    name = request.args.get('name')
+    email = request.args.get('email')
+    event_footprint = request.args.get('this')
+
+    if g.user:
+        if (g.user.email == None) or (g.user.name == None):
+            user = User(g.user.screen_name, g.user.oauth_token, g.user.oauth_token_secret, g.user.id, name, email)
+            user.update_user_name_and_email()
+
+    return eventdetails(event_footprint)
 
 
 #TODO remove before going live
