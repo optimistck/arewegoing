@@ -48,7 +48,8 @@
   <div class="alert alert-success" role="alert">
         <p class="lead">
         <i class="fa fa-hand-o-right" aria-hidden="true"></i>
-        Email or message this link: http://127.0.0.1:4995/to?this={{event_footprint}}
+            <button onclick="copyToClipboard('#p1')" class="btn btn-primary">Copy Link</button>
+        and message participants: <strong id="p1">{{app_url}}/to?this={{event_footprint}}</strong>
         </p>
   </div>
 {% endblock %}

@@ -6,10 +6,12 @@ import requests
 from event import Event
 from participation import Participation
 from datetime import datetime
+import constants
 
 
 app = Flask(__name__)
 app.secret_key = '1swfdqwsfqsqf234'
+app_url = constants.APPLICATION_URL
 
 Database.initialize(host='localhost', database='iwillgoifyougo', user='postgres', password='asdf')
 
@@ -100,7 +102,7 @@ def eventconfirmation():
     name_email_status = "Hello world"
     if (g.user.email == None) or (g.user.name == None):
         name_email_status = None
-    return render_template('eventconfirmation.html', user=g.user, description=description, date=date, organizer_id=organizer_id, event_footprint=event_footprint, min_participants=min_participants, name_email_status=name_email_status)
+    return render_template('eventconfirmation.html', user=g.user, description=description, date=date, organizer_id=organizer_id, event_footprint=event_footprint, min_participants=min_participants, name_email_status=name_email_status, app_url=app_url)
 
 
 #TODO this one is OK (check) to join event without being signed in
@@ -227,7 +229,7 @@ def eventdetails(helper_event_footprint=None):
     event = Event.load_event_from_db_by_event_footprint(event_footprint)
     event_id = Event.get_event_id_from_event_footprint(event_footprint)
     participants = Participation.load_event_participant_names(event_id[0])
-    return render_template('eventdetails.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id, event_footprint=event_footprint, participants=participants, min_participants=event.min_participants[0], participants_count=event.participants_count)
+    return render_template('eventdetails.html', description=str(event.event_description[0]), date=str(event.event_date[0]), event_id=event.id, event_footprint=event_footprint, participants=participants, min_participants=event.min_participants[0], participants_count=event.participants_count, app_url=app_url)
 
 @app.route('/add_name_email')
 def add_name_email():
@@ -268,6 +270,9 @@ def search():
 def about():
     return render_template('about.html')
 
+def format_datetime(timestamp):
+    """Format a timestamp for display."""
+    return datetime.utcfromtimestamp(timestamp).strftime('%Y-%m-%d @ %H:%M')
 
 #TODO remove before going live
 @app.route('/t')
