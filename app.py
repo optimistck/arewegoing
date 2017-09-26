@@ -57,6 +57,9 @@ def logout():
     session.clear()
     return redirect(url_for('homepage'))
 
+@app.route('/fb')
+def fb():
+    return render_template('fb.html')
 
 @app.route('/auth/twitter') #http://127.0.0.1:4995/auth/twitter?oauth_token=utbuKQAAAAAA2DxrAA
 def twitter_auth():
