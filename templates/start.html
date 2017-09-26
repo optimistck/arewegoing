@@ -2,27 +2,46 @@
 
 {% block header_title_lead %}{% endblock %}
 
-{% block navbar %}| <a href="{{ url_for('twitter_login') }}">Login with Twitter</a> to start{% endblock %}
+{% block navbar %}
+
+                  <li class="nav-item g-ml-15--lg">
+                    <a href="{{ url_for('twitter_login') }}" class="nav-link g-color-white p-0">Login with Twitter</a>
+                  </li>
+
+{% endblock %}
 
 {% block content %}
 
-    <h3>The simplest way to gauge group's interest</h3>
-    <p class="lead">
-        <i class="fa fa-hand-o-right" aria-hidden="true"></i>
-        <a href="{{ url_for('twitter_login') }}">Login with Twitter</a> to create an activity and see if there is interest.
-    </p>
 
 
 
-    <P></P>
-    <h4>Solve the "I will go if you will go" problem in 3 steps:</h4>
-    <OL>
-        <LI>Create activity (30 seconds)</LI>
-        <LI>Send event link</LI>
-        <LI>Activity is a go once a minimum is met</LI>
-    </OL>
-<P></P>
 
+    <div class="g-absolute-centered w-100">
+      <div class="container text-center g-width-780">
+        <div class="info-v3-4 g-theme-bg-blue-dark-v1-opacity-0_9 g-pa-20 g-pa-40--md">
+          <div class="g-pos-rel g-z-index-3">
+            <h3 class="h3 text-uppercase g-letter-spacing-3 g-font-size-default g-color-white g-mb-10">Are We Going?</h3>
+            <h2 class="h2 text-uppercase g-color-white g-letter-spacing-5 g-font-weight-400 g-font-size-25 g-font-size-35--md g-mb-20">The simplest way to check group's interest</h2>
+            <p class="g-line-height-1_8 g-letter-spacing-3 g-color-white g-mb-20">
+              <ul class="list-unstyled text-uppercase g-mb-0">
+                <li class="g-line-height-1_8 g-letter-spacing-3 g-color-white g-mb-20"><i class="fa fa-calendar" aria-hidden="true"></i> Propose an activity</li>
+                <li class="g-line-height-1_8 g-letter-spacing-3 g-color-white g-mb-20"><i class="fa fa-edit"></i> Send the event link </li>
+                <li class="g-line-height-1_8 g-letter-spacing-3 g-color-white g-mb-20"><i class="fa fa-thermometer-full" aria-hidden="true"></i> Know when it's a go once a minimum is met<li>
+                </ul>
+              </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+   <div class="g-pos-rel g-z-index-3">
+
+            <p class="g-line-height-1_8 g-letter-spacing-3 g-color-black g-mb-100">
+              <br> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <a href="{{ url_for('twitter_login') }}" class="btn text-uppercase u-btn-outline-black rounded-0">Create an Event</a>
+                <br> <br><br>It's free.</p>
+    </div>
 
 
 {% endblock %}

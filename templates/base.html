@@ -5,7 +5,9 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>AreWeGoing.com</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- Title -->
+      <title>AreWeGoing.com</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -19,40 +21,200 @@
       $temp.remove();
       }
     </script>
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../static/assets/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto%3A400%2C700%7COpen+Sans%3A300%2C400%2C600%2C700%2C800%7CPlayfair+Display%7CRaleway%7CSpectral%7CRubik">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="../static/assets/vendor/bootstrap/bootstrap.min.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="../static/assets/vendor/icon-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/assets/vendor/icon-line/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../static/assets/vendor/icon-hs/style.css">
+    <link rel="stylesheet" href="../static/assets/vendor/hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" href="../static/assets/vendor/animate.css">
+    <link rel="stylesheet" href="../static/assets/vendor/slick-carousel/slick/slick.css">
+
+    <!-- CSS Template -->
+    <link rel="stylesheet" href="../static/assets_template/css/styles.op-business.css">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="../static/assets/css/custom.css">
+
+
+
     {% block head %}{% endblock %}
+
+
+
+
+
+
+
 
   </head>
   <body>
+      <main>
+
+
+                <!-- Header v1 -->
+      <header id="js-header" class="u-header u-header--sticky-top u-header--change-appearance"
+              data-header-fix-moment="100">
+        <div class="u-header__section g-theme-bg-blue-dark-v1-opacity-0_9 g-transition-0_3 g-py-25"
+             data-header-fix-moment-exclude="g-py-25"
+             data-header-fix-moment-classes="g-py-20">
+          <nav class="navbar navbar-expand-lg py-0">
+            <div class="container g-pos-rel">
+              <!-- Logo -->
+              <a href="#"  class="nav-link g-color-white p-0">AreWeGoing.com
+                <!--img class="u-header__logo-img u-header__logo-img--main" src="../static/assets_template/img/logo.png" alt="Image Description" -->
+              </a>
+              <!-- End Logo -->
+
+              <!-- Navigation -->
+              <div class="collapse navbar-collapse align-items-center flex-sm-row" id="navBar">
+                <ul id="js-scroll-nav" class="navbar-nav text-uppercase g-letter-spacing-2 g-font-size-11 g-pt-20 g-pt-0--lg ml-auto">
+                  <li class="nav-item g-mr-15--lg g-mb-7 g-mb-0--lg active">
+                    <a href="{{ url_for('homepage') }}" class="nav-link g-color-white p-0">Home</a>
+                  </li>
+                    {% block navbar %}{% endblock %}
+                  <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg">
+                    <a href="{{ url_for('about') }}" class="nav-link g-color-white p-0">About</a>
+                  </li>
+
+                </ul>
+              </div>
+              <!-- End Navigation -->
+
+              <!-- Responsive Toggle Button -->
+              <button class="navbar-toggler btn g-line-height-1 g-brd-none g-pa-0 g-pos-abs g-top-10 g-right-0" type="button"
+                      aria-label="Toggle navigation"
+                      aria-expanded="false"
+                      aria-controls="navBar"
+                      data-toggle="collapse"
+                      data-target="#navBar">
+                <span class="hamburger hamburger--slider">
+                  <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                  </span>
+                </span>
+              </button>
+              <!-- End Responsive Toggle Button -->
+
+                {% block header %}
+
+                {% endblock %}
+
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- End Header v1 -->
+
+
 
     <div id="page">
+        <div class="g-mt-20 mb-5">
 
-        <nav class="navbar navbar-dark bg-dark">
-          <span class="navbar-text">
-                <a href="{{ url_for('homepage') }}"><i class="fa fa-calendar" aria-hidden="true"></i></a> AreWeGoing.com
+        <p class="g-line-height-2">.</p>
+        </div>
 
-             {% block navbar %}{% endblock %}
-          </span>
-        </nav>
+      <!-- Section Content -->
 
+        <section id="services">
+          <div class="g-max-width-600 text-center mx-auto g-mb-100">
 
-        <div id="content" class="container">
-            {% block header %}{% endblock %}
+              {% block content %}
 
-            {% block content %}{% endblock %}
+              {% endblock %}
 
-            {% block footer %}
-            <footer> </footer>
-            {% endblock %}
+          </div>
+      </section>
+      <!-- End Section Content -->
 
-        </div><!-- /content -->
     </div><!-- /page -->
 
+
+
+
+
+      <footer>
+          {% block footer %}
+
+          {% endblock %}
+        <div id="contact" class="text-center g-color-gray-light-v2 g-theme-bg-blue-dark-v1 g-py-10">
+          <div class="container g-width-780 g-mb-0">
+
+            <p class="g-color-gray-light-v2 mb-0">First ask: AreWeGoing? Then organize.</p>
+          </div>
+
+        </div>
+
+        <!-- Icon Blocks -->
+
+        <!-- End Icon Blocks -->
+
+
+        <div class="text-center g-color-gray-dark-v3 g-pa-30">
+          <div class="g-width-600 mx-auto">
+
+
+            <p class="g-font-size-12 mb-0">© 2017 All rights reserved.
+              <a href="/" class="g-color-primary">AreWeGoing.com</a></p>
+          </div>
+        </div>
+      </footer>
+
+      <a class="js-go-to u-go-to-v1" href="#"
+         data-type="fixed"
+         data-position='{
+           "bottom": 15,
+           "right": 15
+         }'
+         data-offset-top="400"
+         data-compensation="#js-header"
+         data-show-effect="zoomIn">
+        <i class="hs-icon hs-icon-arrow-top"></i>
+      </a>
+
+    </main>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+
+    <!-- JS Global Compulsory -->
+    <script src="../static/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../static/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+    <script src="../static/assets/vendor/jquery.easing/js/jquery.easing.js"></script>
+    <script src="../static/assets/vendor/popper.min.js"></script>
+    <script src="../static/assets/vendor/bootstrap/bootstrap.min.js"></script>
+
+    <!-- JS Implementing Plugins -->
+    <script src="../static/assets/vendor/appear.js"></script>
+    <script src="../static/assets/vendor/slick-carousel/slick/slick.js"></script>
+    <script src="../static/assets/vendor/gmaps/gmaps.min.js"></script>
+
+    <!-- JS Unify -->
+    <script src="../static/assets/js/hs.core.js"></script>
+    <script src="../static/assets/js/components/hs.header.js"></script>
+    <script src="../static/assets/js/helpers/hs.hamburgers.js"></script>
+    <script src="../static/assets/js/components/hs.scroll-nav.js"></script>
+    <script src="../static/assets/js/components/hs.carousel.js"></script>
+    <script src="../static/assets/js/components/gmap/hs.map.js"></script>
+    <script src="../static/assets/js/components/hs.go-to.js"></script>
+
+    <!-- JS Customization -->
+    <script src="../static/assets/js/custom.js"></script>
+
   </body>
 </html>
 

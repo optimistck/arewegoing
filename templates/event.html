@@ -2,10 +2,13 @@
 
 {% block header_title_lead %}{% endblock %}
 
-{% block navbar %} |
-<a href="{{ url_for('list_events') }}">My Activities</a> |
-<a href="{{ url_for('logout') }}">Log out</a>
-
+{% block navbar %}
+                  <li class="nav-item g-ml-15--lg">
+                    <a href="{{ url_for('list_events') }}" class="nav-link g-color-white p-0">My Activities</a>
+                  </li>
+                  <li class="nav-item g-ml-15--lg">
+                    <a href="{{ url_for('logout') }}" class="nav-link g-color-white p-0">Log out</a>
+                  </li>
 {% endblock %}
 
 

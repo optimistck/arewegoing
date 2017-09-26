@@ -5,13 +5,13 @@
 {% block content %}
 
     <div class="container">
-      <H3>Activity Details</H3>
+      <H3>Are you going? We need +1</H3>
       <table class="table table-responsive">
       <thead>
         <tr>
-          <th>Description</th>
-          <th>Date</th>
-          <th>We need +1</th>
+          <th>What</th>
+          <th>When</th>
+          <th>Your Name</th>
           <th>Email</th>
           <th>Yeah?</th>
         </tr>
@@ -22,8 +22,8 @@
                       <td>{{date}}</td>
 
                       <form action="{{ url_for('joinevent')}}">
-                        <td><input type="text" name="person_name" id="name" placeholder={{name}}></td>
-                        <td><input type="text" name="email" id="email" placeholder={{email}}></td>
+                        <td><input class="form-control input-sm" type="text" name="person_name" id="name" placeholder={{name}}></td>
+                        <td><input class="form-control" type="text" name="email" id="email" placeholder={{email}}></td>
                         <td><button type = "submit" class="btn btn-primary">Let's do it</button></td>
                         <INPUT type="password" style="display:none" name="event_id" value={{event_id}}>
                       </form>
@@ -33,7 +33,7 @@
 
   </div>
 <P></P>
-E-mail will be visible to the organizer. Never sold or misused by AreWeGoing.com
+Name and e-mail will be visible to the organizer. We don't sell your data.
 
 {% endblock %}
 
