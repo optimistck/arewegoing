@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, request, url_for, g
+from flask import Flask, render_template, session, redirect, request, url_for, g, flash
 from twitter_utils import  get_request_token, get_oauth_verifier_url, get_access_token, get_event_footprint
 from user import User
 from database import Database
@@ -7,13 +7,39 @@ from event import Event
 from participation import Participation
 from datetime import datetime
 import constants
-
+from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
+from oauth import OAuthSignIn
 
 app = Flask(__name__)
 app.secret_key = '1swfdqwsfqsqf234'
 app_url = constants.APPLICATION_URL
-
 Database.initialize(host='localhost', database='iwillgoifyougo', user='postgres', password='asdf')
+
+## NEW ##
+
+app.config['SECRET_KEY'] = 'top secret!'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+app.config['OAUTH_CREDENTIALS'] = {
+    'facebook': {
+        'id': '154318681832470',
+        'secret': '47e8759336b6881ad3b15f92004bfd65'
+    },
+    'twitter': {
+        'id': '---',
+        'secret': '---'
+    }
+}
+
+
+
+## NEW ##
+lm = LoginManager(app)
+lm.login_view = 'login'
+
+
+# @lm.user_loader
+# def load_user(id):
+#     return User.query.get(int(id))
 
 #we can exec the same code before each request ... use case you want to have a user object, why not pass the user, e.g., need access to user object in EVERY method
 
@@ -57,9 +83,41 @@ def logout():
     session.clear()
     return redirect(url_for('homepage'))
 
-@app.route('/fb')
-def fb():
-    return render_template('fb.html')
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/authorize/<provider>')
+def oauth_authorize(provider):
+    if g.user:
+        #return render_template('msg.html', message="Not logged in (not g.user).")
+        return redirect(url_for('homepage'))
+    oauth = OAuthSignIn.get_provider(provider)
+    #return render_template('msg.html', message="Logged in yes. g.user.")
+    return oauth.authorize()
+
+
+@app.route('/callback/<provider>')
+def oauth_callback(provider):
+    if g.user:
+        #return render_template('msg.html', message="Not logged in (not g.user).")
+        return redirect(url_for('homepage'))
+    oauth = OAuthSignIn.get_provider(provider)
+    social_id, username, email = oauth.callback()
+    if social_id is None:
+        flash('Authentication failed.')
+        print("AUTH FAILED")
+        return redirect(url_for('index'))
+    user = User.query.filter_by(social_id=social_id).first()
+    if not user:
+        print("DOING SOMETHING")
+        user = User(social_id=social_id, nickname=username, email=email)
+        db.session.add(user)
+        db.session.commit()
+    login_user(user, True)
+    return redirect(url_for('index'))
+
+
 
 @app.route('/auth/twitter') #http://127.0.0.1:4995/auth/twitter?oauth_token=utbuKQAAAAAA2DxrAA
 def twitter_auth():
