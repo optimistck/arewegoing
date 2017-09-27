@@ -211,7 +211,7 @@ def cancelevent():
     event_id = request.args.get('event_id')
     participant_id = g.user.id
     cancel_result = Event.delete_event(event_id, participant_id)
-    return render_template('confirmation.html', user=g.user, message="You cancelled the activity. There is no undo, but you can create a new event. No messages were sent to the participants (by design).")
+    return render_template('confirmation.html', user=g.user, message="You cancelled the activity. There is no undo, but you can create a new event.")
 
 @app.route('/canceleventwithafoot')
 def canceleventwithafootprint():

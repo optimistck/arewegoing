@@ -17,7 +17,7 @@
       {% if message == 'organizeronly' or message == 'participantandorganizer' or message == 'participantonly' %}
 <h1>Your commitments</h1>
       {% else %}
-            <H1>You Don't Have Any Activity Feelers</H1>
+            <H1>No events</H1>
             <p class="lead">
               Go ahead and <a href="{{ url_for('event') }}">create an activity</a>. This app is the simplest way to gauge group's interest. Give it a go.
             </p>
@@ -66,7 +66,7 @@
     <tbody>
           {% for participant_instance in participant %}
                   <tr>
-                    <td class="text-left">{{ participant_instance[1] }}</td>
+                    <td>{{ participant_instance[1] }}</td>
                     <td>{{ participant_instance[2] }}</td>
                     <td><a href="{{ url_for('bailfromevent', event_id=participant_instance[0]) }}"><i class="fa fa-user-times"></i> Bail Out</a></td>
                   </tr>
