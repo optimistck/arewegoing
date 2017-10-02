@@ -1,0 +1,21 @@
+runtime: python
+env: flex
+entrypoint: gunicorn -b :$PORT main:app
+
+runtime_config:
+  python_version: 3
+
+#[START env]
+env_variables:
+    # Replace user, password, database, and instance connection name with the values obtained
+    # when configuring your Cloud SQL instance.
+    #SQLALCHEMY_DATABASE_URI: >-
+     # postgresql+psycopg2://ck:gARLden4rewegoing!@/arewegoing1?host=/cloudsql/arewegoing1:us-east1:arewegoing1
+#[END env]
+
+#[START cloudsql_settings]
+# Replace project and instance with the values obtained  when configuring your
+# Cloud SQL instance.
+beta_settings:
+    cloud_sql_instances: arewegoing1:us-east1:arewegoing1
+#[END cloudsql_settings]
