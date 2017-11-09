@@ -14,8 +14,8 @@ import logging
 app = Flask(__name__)
 app.secret_key = '1swfdqwsfqsqf234'
 app_url = constants.APPLICATION_URL
-#Database.initialize(host='localhost', database='iwillgoifyougo', user='postgres', password='asdf')
-Database.initialize(host='35.196.51.49', database='arewegoing1', user='ck', password='gARLden4rewegoing')
+Database.initialize(host='localhost', database='iwillgoifyougo', user='postgres', password='asdf')
+#Database.initialize(host='35.196.51.49', database='arewegoing1', user='ck', password='##############')
 
 
 ## NEW ##
